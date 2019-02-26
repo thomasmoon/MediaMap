@@ -1,6 +1,8 @@
 # Media Map
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.1.4.
+This is a media mapping tool created for a massive open online course (MOOC) at the University of Helsinki.
+
+Generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.1.4.
 
 ## Development server
 
