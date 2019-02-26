@@ -1,0 +1,45 @@
+
+<div class="map-grid">
+  <!--
+    <mat-toolbar color="primary">
+      <span>Eira 360°</span>
+    </mat-toolbar>-->
+  <div id='map' class="map"></div>
+  <!--
+  <mat-toolbar color="primary" class="locations-toolbar">
+      <span>Locations</span>
+    </mat-toolbar>-->
+  <div class="locations-row">
+    <div class="tools">
+        <mat-tab-group>
+          <mat-tab label="Videos">
+            <ng-template matTabContent>
+              <div class="locations">
+                  <mat-nav-list class="locations-list">
+                    <a mat-list-item [routerLink]="['/loc', i+1]" *ngFor="let loc of locations; let i = index" routerLinkActive="active" (click)="resetRouter()">{{ loc.properties.name }}</a>
+                  </mat-nav-list>
+              </div>
+            </ng-template>
+          </mat-tab>
+          <mat-tab label="Tasks">
+            <ng-template matTabContent>
+                <div class="tasks">
+                    <mat-nav-list class="tasks-list">
+                      <a mat-list-item [routerLink]="['/loc', i+1]" *ngFor="let task of tasks; let i = index" routerLinkActive="active" (click)="resetRouter()">{{ task }}</a>
+                    </mat-nav-list>
+                </div>
+            </ng-template>
+          </mat-tab>
+        </mat-tab-group>
+    </div>
+    <div class="camera">
+        <div class="videoWrapper">
+          <!--<iframe width="560" height="315" src="" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>-->
+          <!-- The player is inserted in the following div element -->
+          <div id="player"></div>
+        </div>
+      </div>
+  </div>
+</div>
+
+<dialog-block #locDialog></dialog-block>

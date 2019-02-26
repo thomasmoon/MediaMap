@@ -1,0 +1,13 @@
+.custom-dialog {
+    .mat-dialog-container {
+        padding: 0 !important;
+    }
+}
+
+dialog-block {
+    overflow: hidden;
+}
+
+.mat-dialog-actions {
+    display: none !important;
+}

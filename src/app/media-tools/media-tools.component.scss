@@ -1,0 +1,25 @@
+$fd-dark-blue: #121220;
+$fd-teal: #B0D9D8;
+$fd-dark-grey: #363636;
+
+.media-tools {
+    display: inline-flex;
+    flex-grow: 2;
+}  
+
+.locations {
+    overflow: scroll;
+
+    a {
+
+    &.active {
+        background: $fd-teal;
+    }
+    }
+}
+
+.locations-list {
+    overflow: scroll;
+}
+
+mat-tab-group { height: 100% }
