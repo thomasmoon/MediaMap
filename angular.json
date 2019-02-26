@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "eira": {
+    "media-map": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -108,7 +108,7 @@
         }
       }
     },
-    "eira-e2e": {
+    "media-map-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "prefix": "",
