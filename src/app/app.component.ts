@@ -1,4 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+
+import { Router } from '@angular/router';
+import { AuthService } from './services/auth.service';
+
 
 @Component({
   selector: 'app-root',
@@ -10,6 +14,19 @@ import { Component } from '@angular/core';
     "node_modules/primeng/resources/primeng.min.css"
   ]
 })
-export class AppComponent {
-  title = 'Media Map';
+export class AppComponent implements OnInit {
+  title = 'Online Course in Tropical Forestry';
+
+  user: any;
+
+  constructor(
+    private router: Router,
+    public auth: AuthService
+    ) {
+
+      this.user = auth.user;
+  }
+
+  ngOnInit() {
+  }
 }

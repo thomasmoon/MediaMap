@@ -1,0 +1,32 @@
+<div class="row-1">
+
+  <div class="content-panel">
+    <!-- Content -->
+    <app-content [content]=content>
+    </app-content>
+
+  </div>
+
+  <div class="location-row">
+
+    <!-- Video -->
+    <app-video></app-video>
+    
+    <!-- Map -->
+    <app-map></app-map>
+
+      <!-- Tools -->
+      <app-tools 
+        [locations]=locations
+        [tasks]=tasks
+        [media]=media
+        [authors]=authors
+        ></app-tools>
+
+  </div>
+
+</div>
+
+
+<!-- Dialog
+<dialog-block #locDialog></dialog-block>-->

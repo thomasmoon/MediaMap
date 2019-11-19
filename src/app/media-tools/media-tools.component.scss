@@ -2,6 +2,9 @@ $fd-dark-blue: #121220;
 $fd-teal: #B0D9D8;
 $fd-dark-grey: #363636;
 
+:host {
+}
+
 .media-tools {
     display: inline-flex;
     flex-grow: 2;

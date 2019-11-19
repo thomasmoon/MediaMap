@@ -4,16 +4,16 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { MapBoxComponent } from './map-box/map-box.component';
+import { MapComponent } from './map/map.component';
 import { Dialog } from './dialog/dialog.component';
 import { DialogDialog } from './dialog/dialog.component';
 
 import { MapService } from './services/map.service';
 
 import { environment } from '../environments/environment';
-import { AngularFireModule } from 'angularfire2';
-import { AngularFireDatabaseModule } from 'angularfire2/database';
-import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
 
 import { AuthService } from './services/auth.service';
 
@@ -24,24 +24,34 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatListModule} from '@angular/material/list';
 import {
   MatButtonModule,
+  MatIconModule,
   MatFormFieldModule,
   MatInputModule,
   MatRippleModule,
   MatDialogModule,
   MatDialogRef,
   MAT_DIALOG_DATA,
-  MatTabsModule
+  MatTabsModule,
+  MatCheckboxModule
 } from '@angular/material';
 import { MediaToolsComponent } from './media-tools/media-tools.component';
+import { ContentComponent } from './content/content.component';
+import { ToolsComponent } from './tools/tools.component';
+import { CourseComponent } from './course/course.component';
+import { VideoComponent } from './video/video.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    MapBoxComponent,
+    MapComponent,
     Dialog,
     DialogDialog,
-    MediaToolsComponent
+    MediaToolsComponent,
+    ContentComponent,
+    ToolsComponent,
+    CourseComponent,
+    VideoComponent
   ],
   imports: [
     BrowserModule,
@@ -54,18 +64,24 @@ import { MediaToolsComponent } from './media-tools/media-tools.component';
     MatToolbarModule,
     MatListModule,
     MatButtonModule,
+    MatIconModule,
     MatFormFieldModule,
     MatInputModule,
     MatRippleModule,
     MatDialogModule,
-    MatTabsModule
+    MatTabsModule,
+    MatCheckboxModule
   ],
   entryComponents: [
     DialogDialog
   ],
-  providers: [AuthService, MapService, AngularFirestore
-    , { provide: MatDialogRef, useValue: {} }
-    , { provide: MAT_DIALOG_DATA, useValue: [] }],
+  providers: [
+    AuthService,
+    MapService,
+    AngularFirestore,
+    { provide: MatDialogRef, useValue: {} },
+    { provide: MAT_DIALOG_DATA, useValue: [] }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

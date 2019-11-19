@@ -1,0 +1,184 @@
+import { Component, OnInit, forwardRef, Inject } from '@angular/core';
+import * as mapboxgl from 'mapbox-gl';
+import { MapService } from '../services/map.service';
+import { GeoJson, FeatureCollection } from '../services/map';
+
+// Mapbox
+import { WorldTypeControl } from './world-type-control/world-type-control';
+import { CourseComponent } from '../course/course.component';
+
+@Component({
+  selector: 'app-map',
+  templateUrl: './map.component.html',
+  styleUrls: ['./map.component.scss']
+})
+export class MapComponent implements OnInit{
+
+  // Refs
+  course: any;
+
+  // Default settings for Map
+  map: mapboxgl.Map;
+  style = 'mapbox://styles/mapbox/outdoors-v10';
+  lat = 19.888900;
+  lng = 102.133700;
+  defaultBearing = 190;
+  currentBearing: number;
+  defaultPitch = 60;
+  currentPitch = this.defaultPitch;
+
+  // data
+  source: any;
+  markers: any;
+  tasksDynamic: any;
+
+  links: any;
+
+  constructor(
+
+    @Inject(forwardRef(() => CourseComponent)) course,
+
+    // Map service
+    private mapService: MapService,
+  ) {
+    this.course = course;
+  }
+
+  ngOnInit() {
+    this.markers = this.mapService.getMarkers()
+  }
+
+  ngAfterViewInit() {
+    this.initializeMap();
+  }
+
+  private initializeMap() {
+
+    this.buildMap()
+  }
+
+  buildMap() {
+    this.map = new mapboxgl.Map({
+      container: 'map',
+      style: this.style,
+      zoom: 15,
+      pitch: this.defaultPitch,
+      bearing: this.defaultBearing,
+      center: [this.lng, this.lat],
+      trackResize: false
+    });
+
+    // Disable scroll wheel
+    if (this.map.scrollZoom) {
+      this.map.scrollZoom.disable();
+    }
+
+    // Fullscreen
+    this.map.addControl(new mapboxgl.FullscreenControl(), 'top-right');
+
+    // World Type control (3D/2D)
+    this.map.addControl(new WorldTypeControl(), 'top-right');
+
+    // Navigation
+    this.map.addControl(new mapboxgl.NavigationControl(), 'top-right');
+
+    // Click Marker
+    this.map.on('click', 'locations', function (e: mapboxgl.event) {
+
+      var coordinates = e.features[0].geometry.coordinates.slice();
+
+      this.flyTo(e.features[0]);
+
+      this.routeEventInitiated = false;
+      this.listInitiated = false;
+      
+      this.course.router.navigate(['/loc', e.features[0].properties.index+1])
+
+    }.bind(this));
+
+    /// Add realtime firebase data on map load
+    this.map.on('load', (event: mapboxgl.event) => {
+
+      /// register source
+      this.map.addSource('firebase', {
+         type: 'geojson',
+         data: {
+           type: 'FeatureCollection',
+           features: []
+         }
+      });
+
+      /// get source
+      this.source = this.map.getSource('firebase')
+
+      /// subscribe to realtime database and set data source
+      this.markers.subscribe(markers => {
+
+        this.course.locations = markers;
+        this.course.updateView();
+
+        let data = new FeatureCollection(markers)
+        this.source.setData(data)
+      });
+
+      /*
+      /// subscribe to realtime database and set data source
+      this.tasksDynamic.subscribe(tasksDynamic => {
+
+        this.tasks = tasksDynamic;
+
+        let data = new FeatureCollection(tasksDynamic)
+        this.source.setData(data)
+      });*/
+
+
+      /// create map layers with realtime data
+      this.map.addLayer({
+        id: 'locations',
+        source: 'firebase',
+        type: 'symbol',
+        layout: {
+          'icon-image': 'cinema-15',
+          'icon-size': 1,
+          'text-offset': [0, 1.5],
+          'text-field': '{shortname}',
+          'text-optional': true
+        },
+        paint: {
+          'text-color': '#121220',
+          'text-halo-color': '#fff',
+          'text-halo-width': 2
+        }
+      });
+    })
+
+  }
+
+
+  /// Helpers
+  removeMarker(marker: mapboxgl.Marker) {
+    this.mapService.removeMarker(marker.$key)
+  }
+
+  setPitch(pitch: number) {
+    this.map.setPitch(this.currentPitch + pitch);
+  }
+
+  setBearing(bearing: number) {
+    this.map.setBearing((this.currentBearing - bearing) % 360);
+  }
+
+  flyTo(data: GeoJson, zoom = 15) {
+
+    this.map.flyTo({
+      center: data.geometry.coordinates,
+      zoom: zoom
+      /*,
+      curve: 1, // change the speed at which it zooms out
+ 
+      // This can be any easing function: it takes a number between
+      // 0 and 1 and returns another number between 0 and 1.
+      easing: function (t) { return t; }*/
+    })
+  }
+}

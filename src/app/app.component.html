@@ -1,2 +1,29 @@
+<mat-toolbar color="primary">
+    <span class="title">
+        <span class="logo"></span>
+        Virtual Field Course - Forestry in the Tropics
+    </span>
+    <span></span>
+    <span class="user">
+        <span class="photo"></span>
+        <span class="name">
+
+            <span></span>
+            <button mat-button class="primary" (click)="auth.facebookLogin()">
+                    LOGIN
+                    </button>   
+            
+        </span>
+        <!-- menu button
+        <button
+        mat-icon-button
+        class="menu"
+        aria-label="Menu"
+        (click)="sidenav.toggle()">
+        <mat-icon>menu</mat-icon>
+        </button>-->
+    </span>
+</mat-toolbar>
+
 <router-outlet></router-outlet>
 
