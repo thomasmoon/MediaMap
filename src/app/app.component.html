@@ -1,18 +1,20 @@
 <mat-toolbar color="primary">
-    <span>VITRI Field Course, Laos 2019</span>
+    <span class="title">
+        <span class="logo"></span>
+        <span>Online Course in Tropical Forestry</span>
+        <span></span>
+    </span>
     <span></span>
     <span>
-        Welcome, Guest
         <!-- menu button -->
         <button
         mat-icon-button
         class="menu"
-        aria-label="Menu"
-        (click)="sidenav.toggle()">
-        <mat-icon>menu</mat-icon>
+        aria-label="Menu">
+        <!--<mat-icon>menu</mat-icon>-->
+            LOGIN
         </button>
     </span>
 </mat-toolbar>
 
 <router-outlet></router-outlet>
-

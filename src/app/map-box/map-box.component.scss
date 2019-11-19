@@ -2,23 +2,45 @@ $fd-dark-blue: #121220;
 $fd-teal: #B0D9D8;
 $fd-dark-grey: #363636;
 
-mat-toolbar {
-}
+.location {
+  display: flex;
+  flex-direction: row;
+  max-height: calc(100vh - 64px);
 
-mat-tab-header {
-}
+  .left {
+    flex-grow: 3;
+    max-width: 768px;
+    height: calc(100vh - 64px);
+    box-shadow: 0 19px 38px rgba(90, 73, 73, 0.3), 0 15px 12px rgba(0,0,0,0.22);
+    z-index: 3000;
+    overflow: hidden;
+    //border-left: 1px solid #ccc;
+  }
 
-.map {
+  .right {
+    padding: 0 32px;
+    background-color: #fff;
+    overflow-y: auto;
+    max-width: 375px;
+    min-width: 375px;
+
+    @media (max-width: calc(924px)){
+      height: calc((100vh - 64px) / 2);
+    }
+
+    border-left: 1px solid #ccc;
+
+  }
 }
 
 .map-grid {
   display: flex;
   flex-direction: column;
+  height: 100%;
   width: 100%;
-  height: calc(100% - 64px);
 
-  .map {
-      flex-grow: 2;
+  .camera {
+    border-bottom: 1px solid #ccc;
   }
 }
 
@@ -31,11 +53,8 @@ mat-tab-header {
 .locations-row {
   display: flex;
   flex-direction: row;
-  height: 40vw;
-  max-height: 50vh;
-  @media (max-width: 640px){
-    display: none;
-  }
+  flex-grow: 2;
+
   @media (min-width: 960px){
     height: 37vw;
   }
@@ -44,7 +63,67 @@ mat-tab-header {
   >.info {
     flex-grow: 1;
   }
+
+  .tools {
+    background-color: #efefef;
+    box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+    z-index: 1000;
+  }
 }
+
+.camera {
+  background: #000;
+  width: 100%;
+  
+}
+
+.videoWrapper {
+	position: relative;
+  // let's not lock it
+  padding-bottom: 56.25%; /* 16:9 */
+  width: 100%;
+}
+
+.map {
+  flex-grow: 2;
+}
+
+.course-info {
+  display: flex;
+  flex-direction: row;
+}
+
+@media (max-width: calc(924px)){
+
+  .course-info {
+    flex-direction: column;
+    width: 50vw;
+
+    .right {
+      max-width: none;
+      min-width: 0;
+    }
+  }
+
+  .tools {
+    height: calc((100vh - 64px) / 2);
+  }
+}
+
+@media (max-width: 640px){
+  .course-info {
+    display: none;
+  }
+
+  .map-grid .camera {
+    display: none;
+  }
+
+  .location {
+    display: block;
+  }
+}
+
 
 .locations {
   overflow: scroll;
@@ -62,17 +141,3 @@ mat-tab-header {
 }
 
 mat-tab-group { height: 100% }
-
-.camera {
-  background: #000;
-  width: 66.666%;
-  // prevent the video ever being cut off the bottom of the screen
-  max-width: 88.888889vh; // 50vh * 9/16
-}
-
-.videoWrapper {
-	position: relative;
-	// let's not lock itpadding-bottom: 56.25%; /* 16:9 */
-  height: 100%;
-  width: 100%;
-}

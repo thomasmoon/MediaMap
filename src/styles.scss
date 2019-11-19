@@ -6,12 +6,35 @@ $fd-teal: #B0D9D8;
 $fd-dark-grey: #363636;
 
 body, html {
+    background-color: #efefef;
+    font-family: Roboto, sans-serif;
     padding: 0;
     margin: 0;
     height: 100%;
     overflow: hidden;
 }
 
+.mat-toolbar {
+    
+    .title {
+        margin-left: 3px;
+        padding-left: 48px;
+        position: relative;
+    }
+
+    .logo {
+        position: absolute;
+        top: -3px;
+        left: -3px;
+        display: block;
+        width: 40px;
+        height: 40px;
+        background-image: url('/assets/university_of_helsinki-logo.svg');
+        background-position: left center;
+        background-size: auto 100%;
+        background-repeat: no-repeat;
+    }
+}
 
 .map-grid {
     .mat-toolbar-single-row {
