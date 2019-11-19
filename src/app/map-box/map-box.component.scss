@@ -3,7 +3,9 @@ $fd-teal: #B0D9D8;
 $fd-dark-grey: #363636;
 
 mat-toolbar {
-  display: none;
+}
+
+mat-tab-header {
 }
 
 .map {
@@ -13,7 +15,7 @@ mat-toolbar {
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 100%;
+  height: calc(100% - 64px);
 
   .map {
       flex-grow: 2;
@@ -38,8 +40,9 @@ mat-toolbar {
     height: 37vw;
   }
 
-  >.tools {
-    flex-grow: 2;
+  >.tools,
+  >.info {
+    flex-grow: 1;
   }
 }
 
@@ -69,6 +72,7 @@ mat-tab-group { height: 100% }
 
 .videoWrapper {
 	position: relative;
-	padding-bottom: 56.25%; /* 16:9 */
-	height: 0;
+	// let's not lock itpadding-bottom: 56.25%; /* 16:9 */
+  height: 100%;
+  width: 100%;
 }

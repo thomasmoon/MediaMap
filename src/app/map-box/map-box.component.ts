@@ -28,8 +28,8 @@ export class MapBoxComponent implements OnInit{
   // Default settings for Map
   map: mapboxgl.Map;
   style = 'mapbox://styles/mapbox/outdoors-v10';
-  lat = 60.155;
-  lng = 24.935912;
+  lat = 19.888900;
+  lng = 102.133700;
   defaultBearing = 190;
   currentBearing: number;
   defaultPitch = 60;
@@ -44,7 +44,9 @@ export class MapBoxComponent implements OnInit{
 
   // Tools (Locations & Tasks)
   locations: any;
-  tasks = ['Task 1', 'Task 2'];
+  tasks = ['Focus groups', 'River weed value-chain', 'Household interviews', 'Forest inventory', 'Biodiversity sampling'];
+  media = ['360°', 'Photos', 'Videos', 'Timelapse', 'Podcasts'];
+  authors = ['Thomas Moon', 'Adrián Monge'];
 
   locIndex: any;
   private locIndexSub: any;
@@ -73,7 +75,11 @@ export class MapBoxComponent implements OnInit{
   YTbearing: number;
   YTpitch: number;
 
-  constructor(private route: ActivatedRoute, private router: Router, private mapService: MapService) {
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private mapService: MapService
+    ) {
   }
 
   ngOnInit() {

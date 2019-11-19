@@ -11,9 +11,9 @@ import { DialogDialog } from './dialog/dialog.component';
 import { MapService } from './services/map.service';
 
 import { environment } from '../environments/environment';
-import { AngularFireModule } from 'angularfire2';
-import { AngularFireDatabaseModule } from 'angularfire2/database';
-import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
 
 import { AuthService } from './services/auth.service';
 
@@ -24,13 +24,15 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatListModule} from '@angular/material/list';
 import {
   MatButtonModule,
+  MatIconModule,
   MatFormFieldModule,
   MatInputModule,
   MatRippleModule,
   MatDialogModule,
   MatDialogRef,
   MAT_DIALOG_DATA,
-  MatTabsModule
+  MatTabsModule,
+  MatCheckboxModule
 } from '@angular/material';
 import { MediaToolsComponent } from './media-tools/media-tools.component';
 
@@ -54,11 +56,13 @@ import { MediaToolsComponent } from './media-tools/media-tools.component';
     MatToolbarModule,
     MatListModule,
     MatButtonModule,
+    MatIconModule,
     MatFormFieldModule,
     MatInputModule,
     MatRippleModule,
     MatDialogModule,
-    MatTabsModule
+    MatTabsModule,
+    MatCheckboxModule
   ],
   entryComponents: [
     DialogDialog

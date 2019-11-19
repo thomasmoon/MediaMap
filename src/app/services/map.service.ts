@@ -9,7 +9,7 @@ import {
   Action,
   DocumentSnapshotDoesNotExist,
   DocumentSnapshotExists,
-} from 'angularfire2/firestore';
+} from '@angular/fire/firestore';
 
 import { Observable } from 'rxjs';
 
@@ -29,7 +29,7 @@ export class MapService {
     this.db = db;
 
     this.locations = this.db
-      .collection<GeoJson>('locations')
+      .collection<GeoJson>('locations', ref => ref.orderBy('properties.index'))
       .snapshotChanges()
       .map(actions => {
         return actions.map(a => {
