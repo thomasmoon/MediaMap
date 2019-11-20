@@ -22,7 +22,8 @@ export class CourseComponent implements OnInit {
 
   // Tools (Locations & Tasks)
   locations: any;
-  tasks = ['Focus groups', 'River weed value-chain', 'Household interviews', 'Forest inventory', 'Biodiversity sampling'];
+  topics = ['Value-Chain Analysis', 'Livelihoods', 'Environmental Change', 'Forest Inventory', 'Biodiversity'];
+  methods = ['Focus Group Discussion', 'Personal Interview', 'Household Interview'];
   media = ['360°', 'Photos', 'Videos', 'Timelapse', 'Podcasts'];
   authors = ['Thomas Moon', 'Adrián Monge'];
 

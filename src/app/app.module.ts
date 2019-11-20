@@ -39,6 +39,7 @@ import { ContentComponent } from './content/content.component';
 import { ToolsComponent } from './tools/tools.component';
 import { CourseComponent } from './course/course.component';
 import { VideoComponent } from './video/video.component';
+import { CommentsComponent } from './comments/comments.component';
 
 
 @NgModule({
@@ -51,7 +52,8 @@ import { VideoComponent } from './video/video.component';
     ContentComponent,
     ToolsComponent,
     CourseComponent,
-    VideoComponent
+    VideoComponent,
+    CommentsComponent
   ],
   imports: [
     BrowserModule,

@@ -4,8 +4,9 @@ $fd-dark-grey: #363636;
 
 :host {
   margin-bottom: 1rem;
+  min-width: 280px;
   background-color: #efefef;
-  box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+  //box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
   z-index: 1000;
 }
 
@@ -25,6 +26,6 @@ $fd-dark-grey: #363636;
 }
 
 mat-tab-group { 
-  height: 360px;
+  height: 320px;
   width: 100%;
  }

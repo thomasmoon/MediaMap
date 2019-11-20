@@ -1,45 +1,27 @@
 <!-- tools -->
 <mat-tab-group>
 
-  <!-- Media -->
-  <mat-tab label="Media">
+  <!-- Topics -->
+  <mat-tab label="Topics">
     <ng-template matTabContent>
-      <div class="locations">
-          <mat-nav-list class="locations-list">
-            <a mat-list-item [routerLink]="['/loc', i+1]" *ngFor="let loc of locations; let i = index" routerLinkActive="active" (click)=course.resetRouter()>{{ loc.properties.name }}</a>
-          </mat-nav-list>
-      </div>
-    </ng-template>
-  </mat-tab>
-
-  <!-- Tasks -->
-  <mat-tab label="Tasks">
-    <ng-template matTabContent>
-        <div class="tasks">
+        <div class="topics">
             <mat-nav-list class="tasks-list">
-              <a mat-list-item [routerLink]="['/loc', i+1]" *ngFor="let task of tasks; let i = index" routerLinkActive="active" (click)=course.resetRouter()>{{ task }}</a>
+              <a mat-list-item [routerLink]="['/loc', i+1]" *ngFor="let topic of topics; let i = index" routerLinkActive="active" (click)=course.resetRouter()>{{ topic }}</a>
             </mat-nav-list>
         </div>
     </ng-template>
   </mat-tab>
 
-  <!-- Filters -->
-  <mat-tab label="Filter">
-    <ng-template matTabContent>
-        <div class="media">
-            <mat-nav-list class="media-list">
-              <h3 matSubheader>By type</h3>
-                <a mat-list-item *ngFor="let medium of media; let i = index">
-                  <mat-checkbox class="example-margin" [checked]="i===0">{{ medium }}</mat-checkbox>
-                </a>
-              <h3 matSubheader>By author</h3>
-              <a mat-list-item *ngFor="let author of authors; let i = index">
-                  <mat-checkbox class="example-margin" [checked]="true">{{ author }}</mat-checkbox>
-                </a>
-            </mat-nav-list>
-        </div>
-    </ng-template>
-  </mat-tab>
+  <!-- Methods -->
+  <mat-tab label="Methods">
+      <ng-template matTabContent>
+          <div class="methods">
+              <mat-nav-list class="methods-list">
+                <a mat-list-item [routerLink]="['/loc', i+1]" *ngFor="let method of methods; let i = index" routerLinkActive="active" (click)=course.resetRouter()>{{ method }}</a>
+              </mat-nav-list>
+          </div>
+      </ng-template>
+    </mat-tab>
 
 </mat-tab-group>
 <!-- end tools -->

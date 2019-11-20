@@ -1,9 +1,29 @@
 <div class="row-1">
 
+  <div class="left">
+    <!-- Tools -->
+    <app-tools 
+      [locations]=locations
+      [topics]=topics
+      [methods]=methods
+      [media]=media
+      [authors]=authors
+      ></app-tools>
+
+    <div class="locations">
+        <mat-nav-list class="locations-list">
+          <a mat-list-item [routerLink]="['/loc', i+1]" *ngFor="let loc of locations; let i = index" routerLinkActive="active" (click)=course.resetRouter()>{{i+1}}) {{ loc.properties.name }}</a>
+        </mat-nav-list>
+    </div>
+</div>
+
   <div class="content-panel">
     <!-- Content -->
     <app-content [content]=content>
     </app-content>
+
+    <app-comments>
+    </app-comments>
 
   </div>
 
@@ -14,14 +34,6 @@
     
     <!-- Map -->
     <app-map></app-map>
-
-      <!-- Tools -->
-      <app-tools 
-        [locations]=locations
-        [tasks]=tasks
-        [media]=media
-        [authors]=authors
-        ></app-tools>
 
   </div>
 

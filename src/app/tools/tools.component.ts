@@ -10,7 +10,8 @@ import * as $ from 'jquery';
 export class ToolsComponent implements OnInit {
 
   @Input() locations: any;
-  @Input() tasks: string[];
+  @Input() topics: string[];
+  @Input() methods: string[];
   @Input() media: string[];
   @Input() authors: string[];
 
