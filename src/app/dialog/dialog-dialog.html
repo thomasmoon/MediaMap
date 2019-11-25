@@ -1,7 +1,7 @@
-<div mat-dialog-content>
-</div>
-
-
-<!-- Copyright 2018 Google Inc. All Rights Reserved. [mat-dialog-close]="data.animal" 
-    Use of this source code is governed by an MIT-style license that
-    can be found in the LICENSE file at http://angular.io/license -->
+<h2 mat-dialog-title>Delete comment</h2>
+<mat-dialog-content>Are you sure?</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close>No</button>
+  <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
+  <button mat-button [mat-dialog-close]="true">Yes</button>
+</mat-dialog-actions>

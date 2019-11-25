@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "field-course"
+  },
+  "targets": {
+    "field-course": {
+      "hosting": {
+        "media-map": [
+          "field-course"
+        ]
+      }
+    }
+  }
+}

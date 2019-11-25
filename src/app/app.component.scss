@@ -28,3 +28,97 @@ mat-toolbar.mat-primary {
         }
     }
 }
+
+mat-sidenav-container {
+  min-height: 100vh;
+}
+
+.mat-sidenav {
+
+    display: flex;
+    background-color: #eeeeee;
+    flex-flow: column;
+    justify-content: space-between;
+    min-width: 288px;
+    min-height: 360px;
+  
+    .mat-toolbar {
+      align-content: flex-start;
+      background-color: #fff;
+      display: flex;
+      position: relative;
+      height: auto;
+      padding: 1rem;
+      flex-direction: column;
+      justify-content: space-between;
+  
+      .user-avatar {
+        align-self: stretch;
+      }
+    }
+  
+    .mat-user-avatar {
+      background-size: cover;
+      font-size: 100px;
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      margin-bottom: 1rem;
+    }
+  
+    .name {
+      //position: absolute;
+      //bottom: 1rem;
+      color: #000;
+      font-family: 'Open sans', sans-serif;
+      //left: 1rem;
+      width: 100%;
+    }
+  
+    .sidebar-bottom {
+      padding-bottom: 1rem;
+    }
+  
+    .mat-list {
+      display: flex;
+      flex-direction: column;
+      margin-top: 1rem;
+  
+      .mat-card-subtitle {
+        margin-bottom: 0.5rem;
+        margin-top: 0;
+      }
+  
+      .mat-list-item {
+        margin-bottom: 1px;
+  
+        .mat-list-item-content {
+          padding-left: 0 !important;
+          padding-right: 0 !important;
+        }
+    
+        .mat-button {
+          border-radius: 0;
+          width: 100%;
+          text-align: left;
+          font-family: 'Open sans', sans-serif;
+          background-color: #fff;
+  
+          &:hover {
+            //background-color: $light-green;
+          }
+    
+          .mat-icon {
+            padding-left: 0;
+            margin-right: 0.5rem;
+          }
+        }  
+  
+      }
+    }
+  
+    .mat-card-subtitle {
+      margin: 2rem 1rem 0rem;
+    }
+  }
+  

@@ -1,14 +1,14 @@
 :host {
   background: #000;
-  display: inline-block;
+  display: flex;
   margin-bottom: 1rem;
   margin-right: 1rem;
+  //max-width: 320px;
   width: 100%;
 }
 
 .videoWrapper {
 	position: relative;
-  // let's not lock it
   padding-bottom: 56.25%; /* 16:9 */
   width: 100%;
 }

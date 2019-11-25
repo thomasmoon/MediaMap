@@ -1,5 +1,5 @@
 import { Component, OnInit, forwardRef, Inject, ViewChild } from '@angular/core';
-import { CourseComponent } from '../course/course.component';
+import { CourseComponent } from '../../course/course.component';
 
 @Component({
   selector: 'app-video',
@@ -65,7 +65,7 @@ export class VideoComponent implements OnInit {
 
   // API will call this function when the video player is ready.
   onPlayerReady(event) {
-    event.target.playVideo();
+    //event.target.playVideo();
   }
   
   // 5. The API calls this function when the player's state changes.

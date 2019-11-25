@@ -1,11 +1,12 @@
 import { Component, OnInit, forwardRef, Inject } from '@angular/core';
 import * as mapboxgl from 'mapbox-gl';
-import { MapService } from '../services/map.service';
-import { GeoJson, FeatureCollection } from '../services/map';
+import { MapService } from '../../services/map.service';
+import { GeoJson, FeatureCollection } from '../../services/map';
 
 // Mapbox
 import { WorldTypeControl } from './world-type-control/world-type-control';
-import { CourseComponent } from '../course/course.component';
+import { CourseComponent } from '../../course/course.component';
+import { VideosService } from 'src/app/services/videos.service';
 
 @Component({
   selector: 'app-map',
@@ -37,15 +38,16 @@ export class MapComponent implements OnInit{
   constructor(
 
     @Inject(forwardRef(() => CourseComponent)) course,
-
     // Map service
     private mapService: MapService,
+    private videosService: VideosService,
   ) {
     this.course = course;
   }
 
   ngOnInit() {
-    this.markers = this.mapService.getMarkers()
+    this.markers = this.videosService.videos;
+    this.videosService.loadAll();
   }
 
   ngAfterViewInit() {
@@ -114,7 +116,7 @@ export class MapComponent implements OnInit{
       /// subscribe to realtime database and set data source
       this.markers.subscribe(markers => {
 
-        this.course.locations = markers;
+        this.course.videos = markers;
         this.course.updateView();
 
         let data = new FeatureCollection(markers)

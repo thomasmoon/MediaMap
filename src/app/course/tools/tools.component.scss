@@ -3,26 +3,11 @@ $fd-teal: #B0D9D8;
 $fd-dark-grey: #363636;
 
 :host {
+  display: block;
   margin-bottom: 1rem;
-  min-width: 280px;
-  background-color: #efefef;
+  width: 220px;
   //box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
   z-index: 1000;
-}
-
-.locations {
-  overflow: scroll;
-
-  a {
-
-  &.active {
-      background: $fd-teal;
-  }
-  }
-}
-
-.locations-list {
-  overflow: scroll;
 }
 
 mat-tab-group { 

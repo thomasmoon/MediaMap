@@ -1,10 +1,7 @@
 import {Component, Inject} from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
-import * as $ from 'jquery';
 
 export interface DialogData {
-  animal: string;
-  name: string;
 }
 
 /**
@@ -12,7 +9,7 @@ export interface DialogData {
  */
 @Component({
   selector: 'dialog-block',
-  templateUrl: 'dialog.html',
+  templateUrl: 'dialog-dialog.html',
   styleUrls: ['dialog-dialog.scss'],
   host: {
     '(window:resize)': 'onResize($event)'
@@ -20,7 +17,7 @@ export interface DialogData {
 })
 export class Dialog {
 
-  dialogOpen = false;
+  public dialogOpen = false;
 
   constructor(public dialog: MatDialog) {}
 
@@ -28,25 +25,25 @@ export class Dialog {
 
     this.dialogOpen = true;
 
-    const dialogRef = this.dialog.open(DialogDialog, {
-      width: '320px',
-      height: '180px',
+    const dialogRef = this.dialog.open(Dialog, {
+      width: '250px',
+      height: '200px',
       data: {
         },
       panelClass: 'custom-dialog'
     });
 
     dialogRef.beforeClose().subscribe(result => {
-      $('.camera').html($('.videoWrapper'));
+      // Video player in dialg
+      //$('.camera').html($('.videoWrapper'));
     });
 
     dialogRef.afterClosed().subscribe(result => {
       this.dialogOpen = false;
     });
 
-
-    $('.mat-dialog-container').html($('.videoWrapper'));
-    
+    // Video player in dialog
+    //$('.mat-dialog-container').html($('.videoWrapper'));
   }
 
 
@@ -58,23 +55,6 @@ export class Dialog {
       this.dialog.closeAll();
     }
   }
-}
-
-@Component({
-  selector: 'dialog-dialog',
-  templateUrl: 'dialog-dialog.html',
-})
-export class DialogDialog {
-
-  constructor(
-    public dialogRef: MatDialogRef<DialogDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
-
-  onNoClick(): void {
-
-    this.dialogRef.close();
-  }
-
 }
 
 

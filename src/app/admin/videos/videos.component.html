@@ -1,0 +1,16 @@
+<h2>Videos</h2>
+
+<app-list
+    [rows]="videos | async"
+    [displayedColumns]="displayedColumns">
+</app-list>
+
+<form (ngSubmit)="importExcel()">
+
+    <h2 mat-dialog-title>Import from Excel</h2>
+
+        <div class="mat-form-field-infix">
+        <input type="file" accept=".xlsx" name="excelFile" (change)="fileChange($event)" />
+        </div>
+        <button mat-button type="submit" class="primary">IMPORT</button>
+</form>

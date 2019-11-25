@@ -1,0 +1,61 @@
+:host {
+  margin-bottom: 1rem;
+  max-width: 450px;
+}
+
+mat-card {
+  margin: 1rem 0;
+
+  mat-card-header {
+
+    margin-bottom: 1rem;
+
+    mat-icon {
+      font-size: 42px;
+    }
+  }
+}
+
+form {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+
+  .comment-type {
+    width: 135px;
+  }
+
+  .comment-text {
+    flex-grow: 1;
+    width: 100%;
+  }
+}
+
+mat-list-item {
+  .mat-list-avatar {
+    align-self: flex-start;
+  }
+
+  .comment {
+    position: relative;
+
+    .row2 {
+      white-space: wrap !important;
+    }
+
+    .actions {
+      position: absolute;
+      top: 4px;
+      right: 0;
+    }
+
+  }
+}
+
+.mat-list-base .mat-list-item .mat-line {
+  white-space: normal !important;
+}
+
+.mat-list-base .mat-list-item.mat-2-line {
+  height: auto;
+}

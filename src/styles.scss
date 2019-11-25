@@ -5,10 +5,23 @@ $fd-teal: #B0D9D8;
 $fd-dark-grey: #363636;
 
 body, html {
+    background-color: #ffffff;
     font-family: Roboto, sans-serif;
     padding: 0;
     margin: 0;
-    background-color: #ffffff;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    min-height: 640px;
+    position: relative;
+}
+
+table {
+    width: 100%;
 }
 
 .mat-toolbar {
@@ -51,16 +64,11 @@ body, html {
 }
 
 .mat-dialog-container {
-    padding: 0 !important;
 
     iframe {
         width: 320px;
         height: 180px;
     }
-}
-
-.mat-dialog-actions {
-    display: none;
 }
 
 // Why doesn't this work from map-box.component.ts?
@@ -86,3 +94,39 @@ body, html {
     //height: 32px !important;
     min-width: 100px !important;
 }
+
+.locations {
+
+    width: 220px;
+  
+    .mat-list-item {
+      align-items: flex-start !important;
+      border-bottom: 1px solid #efefef;
+      font-size: 0.875rem;
+      height: auto !important;
+      padding: 1rem 0.5rem;
+  
+      .mat-list-item-content {
+        align-items: flex-start !important;
+        padding: 0.5rem 1rem !important;
+      }
+  
+      .mat-list-text {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start !important;
+      }
+  
+      .videoId {
+          margin-right: 1rem;
+      }
+
+      .name {
+        flex-grow: 1;
+      }
+  
+      &.active {
+        background-color: $fd-teal;
+      }
+    }
+  }

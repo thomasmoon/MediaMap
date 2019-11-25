@@ -1,11 +1,14 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 // View Children
 import { Dialog } from '../dialog/dialog.component';
-import { ToolsComponent } from '../tools/tools.component';
-import { MapComponent } from '../map/map.component';
-import { VideoComponent } from '../video/video.component';
+import { ToolsComponent } from './tools/tools.component';
+import { MapComponent } from './map/map.component';
+import { VideoComponent } from './video/video.component';
+import { MatSidenav } from '@angular/material';
+import { Observable, of } from 'rxjs';
+import { VideosService, Video } from '../services/videos.service';
 
 @Component({
   selector: 'app-course',
@@ -22,15 +25,16 @@ export class CourseComponent implements OnInit {
 
   // Tools (Locations & Tasks)
   locations: any;
-  topics = ['Value-Chain Analysis', 'Livelihoods', 'Environmental Change', 'Forest Inventory', 'Biodiversity'];
-  methods = ['Focus Group Discussion', 'Personal Interview', 'Household Interview'];
-  media = ['360°', 'Photos', 'Videos', 'Timelapse', 'Podcasts'];
-  authors = ['Thomas Moon', 'Adrián Monge'];
+  videos: any;
+  topics: string[];
+  methods: string[];
 
   content = '';
+  title = '';
 
-  locIndex: any;
-  private locIndexSub: any;
+  public locIndex: number;
+  public locIndexSub: any;
+  public videoId;
 
   // Route handling
   routeEventInitiated = false;
@@ -39,10 +43,16 @@ export class CourseComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-  ) { }
+    private videosService: VideosService
+  ) { 
+    this.topics = videosService.topics;
+    this.methods = videosService.methods;
+  }
 
   ngOnInit() {
-
+    // subscribe to entire collection
+    //this.videos = this.videosService.videos;
+    //this.videosService.loadAll();
   }
 
   ngAfterViewInit() {
@@ -60,7 +70,7 @@ export class CourseComponent implements OnInit {
      this.locIndexSub = this.route.params.subscribe(params => {
 
       // This is just getting crazy, so many event leaks
-      if (this.locations && this.locations.length) {
+      if (this.videos && this.videos.length) {
 
         // console.log('Get current location');
 
@@ -68,36 +78,44 @@ export class CourseComponent implements OnInit {
         // In a real app: dispatch action to load the details here.
 
         // When we have a location
-        if (this.locations[this.locIndex]) {
+        if (this.videos[this.locIndex]) {
+
+          this.videoId = this.videos[this.locIndex].properties.videoId;
 
           // We only need to do it once
           //this.routeEventInitiated = true;
 
-          if (this.locations[this.locIndex].properties.hasOwnProperty('content')) {
-            this.content = this.locations[this.locIndex].properties.content;
+          if (this.videos[this.locIndex].properties.hasOwnProperty('name')) {
+            this.title = this.videos[this.locIndex].properties.name;
           } else {
-            this.content = "<h1>Lorem ipsum</h1>";
+            this.title = "";
+          }
+
+          if (this.videos[this.locIndex].properties.hasOwnProperty('description')) {
+            this.content = this.videos[this.locIndex].properties.description;
+          } else {
+            this.content = "";
           }
           
           let zoom = 16,
               // Default bearing is 0 in 2D mode
-              bearing = window['map-world-mode'] !== 1 ? this.map.defaultBearing : 0;
+              bearing = window['map-world-mode'] !== 1 && this.map ? this.map.defaultBearing : 0;
 
           // custom bearing if in 3D map mode
-          if (this.locations[this.locIndex].properties.hasOwnProperty('bearing') && window['map-world-mode'] !== 1) {
-            bearing = this.locations[this.locIndex].properties.bearing;
+          if (this.videos[this.locIndex].properties.hasOwnProperty('bearing') && window['map-world-mode'] !== 1) {
+            bearing = this.videos[this.locIndex].properties.bearing;
           }
 
           // custom zoom
-          if (this.locations[this.locIndex].properties.hasOwnProperty('zoom')) {
-            zoom = this.locations[this.locIndex].properties.zoom;
+          if (this.videos[this.locIndex].hasOwnProperty('zoom')) {
+            zoom = this.videos[this.locIndex].properties.zoom;
           }
 
           this.map.currentBearing = bearing;
           this.map.map.setBearing(bearing);
 
           // Fly to the location with given zoom
-          this.map.flyTo(this.locations[this.locIndex], zoom);
+          this.map.flyTo(this.videos[this.locIndex], zoom);
 
           // if  mobile
           if(false && window.innerWidth <= 640) {
@@ -111,7 +129,7 @@ export class CourseComponent implements OnInit {
 
           } else {
             // play without delay
-            this.video.playVideo(this.locations[this.locIndex].properties.youtubeId);
+            this.video.playVideo(this.videos[this.locIndex].properties.youtubeId);
           }
           
         }
@@ -125,11 +143,18 @@ export class CourseComponent implements OnInit {
 
   nextLocation() {
     // If we have additional locations then go to the next one
-    if (this.locIndex < this.locations.length - 1) {
+    if (this.locIndex < this.videos.length - 1) {
       this.locIndex++;
       this.routeEventInitiated = false;
       this.router.navigate(['/loc', this.locIndex + 1])
       this.updateView();
     }
+  }
+
+  // Add a zero before the number for single digits
+  formatVideoIndex(i:number) {
+    let id = i+1,
+        zeroPadding = id < 10 ? '0':'';
+    return zeroPadding + id;
   }
 }

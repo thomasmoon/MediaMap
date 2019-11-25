@@ -1,0 +1,94 @@
+<!-- Login to view comments-->
+<ng-container *ngIf="auth.user === null">
+  <p>Please login to view comments.</p>
+  <button mat-stroked-button (click)="sidenav.open()">LOGIN</button>
+</ng-container>
+
+<!-- Expert Review Form -->
+<mat-card *ngIf="auth.user">
+  <mat-card-header>
+    <mat-icon mat-card-avatar>chat</mat-icon>
+    <mat-card-title>Expert Review</mat-card-title>
+    <mat-card-subtitle>Please record your observations.</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <form class="comment-form">
+      <mat-form-field class="comment-type">
+          <mat-label>Type</mat-label>
+          <mat-select [(value)]="newComment.type">
+            <mat-option *ngFor="let type of types" [value]="type.value">
+            {{type.viewValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      
+      <mat-form-field class="comment-text">
+        <mat-label>{{types[newComment.type].viewValue}}</mat-label>
+        <textarea matInput
+                cdkTextareaAutosize
+                #autosize="cdkTextareaAutosize"
+                cdkAutosizeMinRows="1"
+                cdkAutosizeMaxRows="10"
+                [(ngModel)]="newComment.text"
+                [ngModelOptions]="{standalone: true}"
+                ></textarea>
+      </mat-form-field>
+    </form>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button (click)="addComment()" *ngIf="!this.newComment.hasOwnProperty('id')">ADD COMMENT</button>
+    <button mat-button (click)="addComment()" *ngIf="this.newComment.hasOwnProperty('id')">UPDATE COMMENT</button>
+  </mat-card-actions>
+</mat-card>
+                                            
+
+<!--
+<mat-card *ngIf="auth.user" class="user-comments" *ngFor="let user in commentsByUser | async">
+  <mat-card-header>
+    <img matCardAvatar src="{{user.userPhoto}}" alt="{{user.userName}}">
+    <mat-card-title>{{user.userName}}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+
+    
+
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button (click)="addComment()">ADD COMMENT</button>
+  </mat-card-actions>
+</mat-card>
+-->
+
+
+<!-- Comment List -->
+<mat-list *ngIf="auth.user">
+    <mat-list-item *ngFor="let user of commentsByUser | async">
+      <img matListAvatar src="{{user.userPhoto}}" alt="{{user.userName}}">
+      <h3 matLine class="comment-user"> {{user.userName}} </h3>
+      <div class="comment" matLine *ngFor="let comment of user.comments">
+        <p class="row1">
+          <span class="date">{{ comment.created | date:'dd.MM.yy HH.mm' }} - </span>
+          <span class="type">{{comment.typeDisplay}}</span>
+        </p>
+        <p class="row2">
+          <span class="text"> {{comment.text}}</span>
+        </p>
+        <div class="actions">
+          <button
+            *ngIf="comment.userId === auth.user.uid || auth.user.isAdmin"
+            mat-icon-button
+            aria-label="Edit this comment"
+            (click)="editComment(comment)">
+              <mat-icon>edit</mat-icon>
+            </button>
+          <button
+            *ngIf="comment.userId === auth.user.uid || auth.user.isAdmin"
+            mat-icon-button
+            aria-label="Delete this comment"
+            (click)="deleteComment(comment.id)">
+              <mat-icon>delete</mat-icon>
+            </button>
+        </div>
+      </div>
+    </mat-list-item>
+  </mat-list>

@@ -1,29 +1,113 @@
-<mat-toolbar color="primary">
-    <span class="title">
-        <span class="logo"></span>
-        Virtual Field Course - Forestry in the Tropics
-    </span>
-    <span></span>
-    <span class="user">
-        <span class="photo"></span>
-        <span class="name">
-
-            <span></span>
-            <button mat-button class="primary" (click)="auth.facebookLogin()">
-                    LOGIN
-                    </button>   
-            
+<mat-sidenav-container class="example-container">
+    
+  <mat-sidenav-content>
+    
+    <!-- Primary toolbar-->
+    <mat-toolbar color="primary">
+        <span class="title">
+            <span class="logo"></span>
+            Virtual Field Course - Forestry in the Tropics
         </span>
-        <!-- menu button
-        <button
-        mat-icon-button
-        class="menu"
-        aria-label="Menu"
-        (click)="sidenav.toggle()">
-        <mat-icon>menu</mat-icon>
-        </button>-->
-    </span>
-</mat-toolbar>
+        <span></span>
+        <span class="user">
+          <span class="photo"></span>
+          <span class="name">
+            <span></span>
+            <button mat-button class="primary" (click)="sidenav.toggle()" *ngIf="auth.user === null">
+              LOGIN
+            </button>
 
-<router-outlet></router-outlet>
+            <button mat-icon-button class="menu" aria-label="Menu" (click)="sidenav.toggle()" *ngIf="auth.user">
+              <mat-icon>menu</mat-icon>
+            </button>            
+          </span>
+        </span>
+    </mat-toolbar>
+
+    <!-- Active Page -->
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+
+  <!-- sidebar -->
+  <mat-sidenav #sidenav mode="push" [opened]="sidenavOpened" position="end">
+
+    <!-- sidebar top -->
+    <div class="sidenav-top">
+
+        <!-- User info -->
+        <mat-toolbar>
+          <div class="user-avatar">
+            <div
+              mat-card-avatar
+              class="mat-user-avatar"
+              *ngIf="auth.user?.photoURL"
+              [style.background-image]="'url(' + auth.user?.photoURL + ')'"
+              >
+            </div>
+            <mat-icon mat-card-avatar class="mat-user-avatar" *ngIf="!auth.user">account_circle</mat-icon>
+          </div>
+  
+          <div class="name">
+            {{ (auth.user?.displayName) || "Welcome, guest" }}
+            <mat-chip-list *ngIf="auth.user?.roles">
+              <mat-chip color="primary" selected="true" *ngIf="auth.user.roles.indexOf('admin') > -1">Admin</mat-chip>
+              <mat-chip color="secondary" selected="true" *ngIf="auth.user.roles.indexOf('expert') > -1">Expert</mat-chip>
+            </mat-chip-list>
+          </div>
+        </mat-toolbar>
+  
+        <!-- Login methods -->
+        <mat-list *ngIf="!auth.user">
+          <mat-card-subtitle>LOGIN METHODS</mat-card-subtitle>
+
+          <mat-action-list>
+              <button mat-list-item (click)="auth.login(item.id)" *ngFor="let item of loginItems">
+                <mat-icon mat-list-icon>{{item.icon}}</mat-icon>
+                <h4 mat-line>{{item.text}}</h4>
+                <p mat-line>{{item.info}}</p>
+              </button>
+            </mat-action-list>
+        </mat-list>
+  
+        <!-- Menu -->
+        <mat-list *ngIf="auth.user">
+          <mat-list-item *ngFor="let item of menuItems">
+            <a mat-button routerLink="{{item.route}}" (click)="sidenav.close()">
+              <mat-icon>{{item.icon}}</mat-icon>
+              {{item.text}}
+            </a>
+          </mat-list-item>
+        </mat-list>
+
+        <!-- Admin menu -->
+        <mat-list *ngIf="auth.user && auth.user.isAdmin">
+          <mat-card-subtitle>ADMIN</mat-card-subtitle>
+          <mat-list-item *ngFor="let item of adminMenuItems">
+            <a mat-button routerLink="{{item.route}}" (click)="sidenav.close()">
+              <mat-icon>{{item.icon}}</mat-icon>
+              {{item.text}}
+            </a>
+          </mat-list-item>
+        </mat-list>
+
+      </div><!-- end of sidebar top -->
+  
+      <!-- sidebar bottom -->
+      <div class="sidebar-bottom">
+        <mat-list>
+          <mat-list-item *ngIf="auth.user">
+            <a mat-button class="logout" (click)="auth.signOut()">
+                <mat-icon>exit_to_app</mat-icon>
+                Logout
+            </a>
+          </mat-list-item>
+        </mat-list>
+
+      </div><!-- end of sidebar bottom -->
+
+  </mat-sidenav>
+
+</mat-sidenav-container>
+
+
 
