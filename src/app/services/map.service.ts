@@ -16,6 +16,7 @@ import { Observable } from 'rxjs';
 import { GeoJson } from './map';
 import * as mapboxgl from 'mapbox-gl';
 import { map } from 'rxjs/operators';
+import { VideosService } from './videos.service';
 
 @Injectable()
 export class MapService {
@@ -23,8 +24,18 @@ export class MapService {
   locations: Observable<any[]>;
   db: AngularFirestore;
 
-  constructor(db: AngularFirestore) {
+  videos: any;
+
+  constructor(
+    db: AngularFirestore,
+    private videosService: VideosService
+    ) {
     mapboxgl.accessToken = environment.mapbox.accessToken;
+
+    this.videos = this.videosService.videos;
+    this.videosService.loadAll();
+
+    /*
 
     this.db = db;
 
@@ -44,25 +55,26 @@ export class MapService {
             return { id, ...data };
           })
         })
-      );
+      );*/
   }
 
   getMarkers() {
-    return this.locations;
+    return this.videos;
   }
 
+  /*
   createMarker(data: GeoJson) {
 
     // Why is this really neccessary, c'mon AngularFirebase
     const markerObject = {
       geometry: data.geometry,
-      properties: data.properties,
+      properties: data,
       type: data.type
     }
 
     this.db
       .collection<GeoJson>('locations').add(markerObject);
-  }
+  }*/
 
   removeMarker($key: string) {
     return this.locations;

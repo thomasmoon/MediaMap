@@ -6,11 +6,7 @@ $fd-teal: #B0D9D8;
 $fd-dark-grey: #363636;
 
 body, html {
-<<<<<<< HEAD
     background-color: #ffffff;
-=======
-    background-color: #efefef;
->>>>>>> 6fb4883fd01385bd908561bfa8e40b0789103df2
     font-family: Roboto, sans-serif;
     padding: 0;
     margin: 0;
@@ -20,7 +16,6 @@ html {
     height: 100%;
 }
 
-<<<<<<< HEAD
 body {
     min-height: 640px;
     position: relative;
@@ -30,8 +25,6 @@ table {
     width: 100%;
 }
 
-=======
->>>>>>> 6fb4883fd01385bd908561bfa8e40b0789103df2
 .mat-toolbar {
     
     .title {
@@ -60,15 +53,6 @@ table {
         color: white;
         height: 48px;
     }
-
-    /*
-    .locations,
-    .camera {
-            .mat-toolbar-single-row {
-            background-color: $fd-dark-grey;
-            color: white;
-        }
-    }*/
 }
 
 .mat-dialog-container {
@@ -99,7 +83,6 @@ table {
   
 .mat-tab-label {
     flex-grow: 1;
-<<<<<<< HEAD
     //height: 32px !important;
     min-width: 100px !important;
 }
@@ -139,7 +122,3 @@ table {
       }
     }
   }
-=======
-    min-width: 100px !important;
-}
->>>>>>> 6fb4883fd01385bd908561bfa8e40b0789103df2
