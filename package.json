@@ -1,6 +1,6 @@
 {
-  "name": "media-map",
-  "version": "1.0.0",
+  "name": "mediamap",
+  "version": "1.0.3",
   "author": "Thomas Moon <mail@thomasmoon.net>",
   "license": "GPL-3.0",
   "scripts": {
