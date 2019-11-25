@@ -8,6 +8,7 @@ import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firest
 
 import { Observable, of } from 'rxjs';
 
+<<<<<<< HEAD
 export interface MoocUser extends User {
   uid: string;
   email: string;
@@ -17,11 +18,27 @@ export interface MoocUser extends User {
   isAdmin?: boolean;
   roles?: [];
 }
+=======
+/*
+export interface User {
+  uid: string;
+  email: string;
+  photoURL?: string;
+  displayName?: string;
+  isAdmin?: boolean;
+  providerId?: string;
+}*/
+>>>>>>> 6fb4883fd01385bd908561bfa8e40b0789103df2
 
 @Injectable()
 export class AuthService {
 
+<<<<<<< HEAD
   public user: MoocUser;
+=======
+  // public authState: any = null;
+  user: User;
+>>>>>>> 6fb4883fd01385bd908561bfa8e40b0789103df2
 
   constructor(
     private afAuth: AngularFireAuth,
@@ -31,6 +48,7 @@ export class AuthService {
 
     // Get auth data, then firestore user document or null
     this.afAuth.authState.subscribe(user => {
+<<<<<<< HEAD
 
       console.log('User info');
       console.log(user);
@@ -86,6 +104,17 @@ export class AuthService {
     }
   }
 
+=======
+      if (user) {
+        this.user = user;
+        localStorage.setItem('user', JSON.stringify(this.user));
+      } else {
+        localStorage.setItem('user', null);
+      }
+    });
+  }
+
+>>>>>>> 6fb4883fd01385bd908561bfa8e40b0789103df2
   public facebookLogin() {
     const provider = new auth.FacebookAuthProvider();
     return this.oAuthLogin(provider);
@@ -98,11 +127,16 @@ export class AuthService {
 
   public loginReturn(result: any) {
 
+<<<<<<< HEAD
     console.log('Login return');
+=======
+    // console.log('Login return');
+>>>>>>> 6fb4883fd01385bd908561bfa8e40b0789103df2
 
     if (result.user === null) {
       return result;
     }
+<<<<<<< HEAD
     
     return this.updateUserData(result.user)
       .then(() => {
@@ -114,6 +148,20 @@ export class AuthService {
       .catch(err => {
         console.log(err);
       });
+=======
+
+    return null;
+    
+    /*
+    return this.updateUserData(result.user)
+      .then(() => {
+        // redirect to home
+        return this.router.navigate(['/']);
+      })
+      .catch(err => {
+        console.log(err);
+      });*/
+>>>>>>> 6fb4883fd01385bd908561bfa8e40b0789103df2
   }
 
   public redirectResult() {

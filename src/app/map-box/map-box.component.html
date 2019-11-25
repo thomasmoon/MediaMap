@@ -1,0 +1,74 @@
+
+<div class="location">
+  
+  <!--
+  <mat-toolbar color="primary" class="locations-toolbar">
+      <span>Locations</span>
+    </mat-toolbar>-->
+    <div class="course-info">
+
+      <!-- tools -->
+      <div class="tools">
+          <mat-tab-group>
+            <mat-tab label="Media">
+              <ng-template matTabContent>
+                <div class="locations">
+                    <mat-nav-list class="locations-list">
+                      <a mat-list-item [routerLink]="['/loc', i+1]" *ngFor="let loc of locations; let i = index" routerLinkActive="active" (click)="resetRouter()">{{ loc.properties.name }}</a>
+                    </mat-nav-list>
+                </div>
+              </ng-template>
+            </mat-tab>
+            <mat-tab label="Tasks">
+              <ng-template matTabContent>
+                  <div class="tasks">
+                      <mat-nav-list class="tasks-list">
+                        <a mat-list-item [routerLink]="['/loc', i+1]" *ngFor="let task of tasks; let i = index" routerLinkActive="active" (click)="resetRouter()">{{ task }}</a>
+                      </mat-nav-list>
+                  </div>
+              </ng-template>
+            </mat-tab>
+            <mat-tab label="Filter">
+              <ng-template matTabContent>
+                  <div class="media">
+                      <mat-nav-list class="media-list">
+                        <h3 matSubheader>By type</h3>
+                          <a mat-list-item *ngFor="let medium of media; let i = index">
+                            <mat-checkbox class="example-margin" [checked]="i===0">{{ medium }}</mat-checkbox>
+                          </a>
+                        <h3 matSubheader>By author</h3>
+                        <a mat-list-item *ngFor="let author of authors; let i = index">
+                            <mat-checkbox class="example-margin" [checked]="true">{{ author }}</mat-checkbox>
+                          </a>
+                      </mat-nav-list>
+                  </div>
+              </ng-template>
+            </mat-tab>
+          </mat-tab-group>
+      </div>
+
+      <div class="right">
+        <div class="content">
+            <h1>Introduction</h1>
+            <p>Every two years, the Viikki Tropical Resources Institute (VITRI) of the University of Helsinki arranges an international field course with partner universities in tropical countries. The most recent field course was organized in Luang Prabang and the Nambak region of northern Laos January 3-20, 2019.</p>
+            <p>The content of the field course covers the ecology, management and conservation of natural and man-made production ecosystems (including agroforestry and estate crops); tree uses, including non-wood forest products; deforestation and forest rehabilitation; community forestry, socio-economic aspects, and forest and land-use-policies.</p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="left">
+      <div class="map-grid"> 
+        <!-- camera -->
+        <div class="camera">
+          <div class="videoWrapper">
+            <div id="player"></div>
+          </div>
+        </div>
+        <div class="locations-row">
+          <div id='map' class="map"></div>
+        </div>
+      </div>
+    </div>
+</div>
+
+<dialog-block #locDialog></dialog-block>

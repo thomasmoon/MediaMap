@@ -1,9 +1,16 @@
+<<<<<<< HEAD
 import { Component, OnInit, ViewChild } from '@angular/core';
 
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from './services/auth.service';
 import { MatSidenav } from '@angular/material';
 import { SidenavService } from './services/sidenav.service';
+=======
+import { Component, OnInit } from '@angular/core';
+
+import { Router } from '@angular/router';
+import { AuthService } from './services/auth.service';
+>>>>>>> 6fb4883fd01385bd908561bfa8e40b0789103df2
 
 
 @Component({
@@ -17,6 +24,7 @@ import { SidenavService } from './services/sidenav.service';
   ]
 })
 export class AppComponent implements OnInit {
+<<<<<<< HEAD
 
   @ViewChild('sidenav', {static: true}) public sidenav: MatSidenav;
 
@@ -94,12 +102,22 @@ export class AppComponent implements OnInit {
     private route: ActivatedRoute,
     public auth: AuthService,
     public sidenavService: SidenavService
+=======
+  title = 'Media Map';
+
+  user: any;
+
+  constructor(
+    private router: Router,
+    public auth: AuthService
+>>>>>>> 6fb4883fd01385bd908561bfa8e40b0789103df2
     ) {
 
       this.user = auth.user;
   }
 
   ngOnInit() {
+<<<<<<< HEAD
 
     console.log('Sidenav info');
     console.log(this.sidenav);
@@ -112,5 +130,7 @@ export class AppComponent implements OnInit {
       // Defaults to 0 if no query param provided.
       this.sidenavOpened = params['login'] || false;
     });
+=======
+>>>>>>> 6fb4883fd01385bd908561bfa8e40b0789103df2
   }
 }
