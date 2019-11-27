@@ -19,7 +19,7 @@ const routes: Routes =
   { path: 'dialog', component: Dialog },
   { path: 'admin/videos', component: VideosComponent, canActivate: [AdminGuard] },
   { path: 'admin/comments', component: CommentsAdminComponent, canActivate: [AdminGuard] },
-  { path: '',   redirectTo: '/loc/1', pathMatch: 'full' }
+  { path: '', redirectTo: 'loc/1', pathMatch: 'full' }
 ]
 
 @NgModule({

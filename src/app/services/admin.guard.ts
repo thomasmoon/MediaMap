@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Router, CanActivate, ActivatedRouteSnapshot } from '@angular/router';
-import { AuthService } from './auth.service';
+import { AuthService, MoocUser } from './auth.service';
+import { map, catchError } from 'rxjs/operators';
+import { of } from 'rxjs';
 
 @Injectable()
 export class AdminGuard implements CanActivate {
@@ -9,17 +11,33 @@ export class AdminGuard implements CanActivate {
 
   canActivate(route: ActivatedRouteSnapshot) {
 
-    if (this.auth.user && this.auth.user.isAdmin) {
-      return true;
-    }
+    //console.log('Auth guard admin.');
 
-    console.log('No rights to view admin content, redirecting...');
+    return this.auth.getUser().pipe(
+      map((user: MoocUser) => {
 
-    this.router.navigate(['/'], {
-      queryParams: {
-        login: 'true'
-      }
-    });
-    return false;
+        //console.log('Got user');
+        //console.log(user);
+
+        if (user && user.isAdmin) {
+
+          //console.log('User is admin, allowed');
+          return true;
+
+        } else {   
+
+          //console.log('User is not admin, redirect');
+          this.auth.redirectLogin();
+        }
+      }),
+      catchError((err) => {
+
+        console.log('Error getting user');
+        console.error(err);
+
+        this.auth.redirectLogin();
+        return of(false);
+      })
+    );
   }
 }

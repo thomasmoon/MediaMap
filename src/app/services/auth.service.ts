@@ -6,7 +6,7 @@ import { User } from 'firebase';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 
-import { Observable, of } from 'rxjs';
+import { Observable, of, BehaviorSubject } from 'rxjs';
 
 export interface MoocUser extends User {
   uid: string;
@@ -22,32 +22,57 @@ export interface MoocUser extends User {
 export class AuthService {
 
   public user: MoocUser;
+  public user$: Observable<MoocUser>;
 
   constructor(
-    private afAuth: AngularFireAuth,
+    public afAuth: AngularFireAuth,
     private afs: AngularFirestore,
     private router: Router
   ) {
 
-    // Get auth data, then firestore user document or null
-    this.afAuth.authState.subscribe(user => {
+    //console.log('Init auth service');
 
-      if (user) {
-        this.user = user;
-        localStorage.setItem('user', JSON.stringify(this.user));
-        this.updateUserData(user);
-        JSON.parse(localStorage.getItem('user'));
-      } else {
-        this.user = null;
-        localStorage.setItem('user', null);
-        JSON.parse(localStorage.getItem('user'));
-      }
+    // This asyc subscription is used by auth guards
+    this.user$ = Observable.create(observer => {
 
+      console.log('started new async process for user');
+
+      // Get auth data, then firestore user document or null
+      this.afAuth.authState.subscribe(user => {
+
+        //console.log('User returned');
+        //console.log(user);
+
+        if (user) {
+          this.user = user;
+          localStorage.setItem('user', JSON.stringify(this.user));
+          this.updateUserData(user)
+            .then(user => {         
+                observer.next(this.user);
+                observer.complete();
+            })
+          JSON.parse(localStorage.getItem('user'));
+        } else {
+          this.user = null;
+          localStorage.setItem('user', null);
+          JSON.parse(localStorage.getItem('user'));
+          observer.next(this.user);
+          observer.complete();
+        }
+
+      });
     });
+
+    // subscribe to self to make sure it's run at least once
+    this.user$.subscribe();
+  }
+
+  public getUser() {
+    return this.user$;
   }
 
   public login(method:string) {
-    console.log(method);
+    //console.log(`Login method: ${method}`);
 
     let provider;
 
@@ -95,7 +120,7 @@ export class AuthService {
 
   public loginReturn(result: any) {
 
-    console.log('Login return');
+    //console.log('Login return');
 
     if (result.user === null) {
       return result;
@@ -138,6 +163,14 @@ export class AuthService {
     this.router.navigate(['/']);
   }
 
+  public redirectLogin(): void {
+    this.router.navigate(['/'], {
+      queryParams: {
+        login: 'true'
+      }
+    });
+  }
+
   private oAuthLogin(provider: any) {
     
     // Prepare for redirect
@@ -168,16 +201,24 @@ export class AuthService {
     }
 
     return userRef.set(data, { merge: true })
-    .then(() => {
-      console.log('User updated');
+      .then(() => {
+        //console.log('User updated');
 
-      /* Check for special roles set in db */
-      userRef.get().subscribe((snap) => {
-        this.user.roles = snap.data().roles;
-        this.user.isAdmin = snap.data().isAdmin;
-      });
-    })
-    .catch(error => console.log(error));
-    }
+        /* Check for special roles set in db */
+        return userRef.get().toPromise()
+          .then((snap) => {
+            this.user.roles = snap.data().roles;
+            this.user.isAdmin = snap.data().isAdmin;
+
+            //console.log("User roles updated");
+            return this.user;
+        });
+        
+      })
+      .catch(error => {
+        console.log(error);
+        return error;
+      }); 
+      }
 
 }

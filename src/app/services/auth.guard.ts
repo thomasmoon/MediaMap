@@ -2,9 +2,10 @@
 
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router'; // ActivatedRouteSnapshot, RouterStateSnapshot,
-import { AuthService } from './auth.service';
+import { AuthService, MoocUser } from './auth.service';
 
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
@@ -16,17 +17,18 @@ export class AuthGuard implements CanActivate {
     // state: RouterStateSnapshot
   ): Observable<boolean> | Promise<boolean> | boolean {
 
-    if (this.auth.user) {
-      return true;
-    }
-
-    console.log('Must be logged in to view this content, redirecting...');
-
-    this.router.navigate(['/'], {
-      queryParams: {
-        login: 'true'
-      }
-    });
-    return false;
+    return this.auth.getUser().pipe(
+      map((user: MoocUser) => {
+        if (user) {
+          return true;
+        } else {   
+          this.auth.redirectLogin();
+        }
+      }),
+      catchError((err) => {
+        this.auth.redirectLogin();
+        return of(false);
+      })
+    );
   }
 }
