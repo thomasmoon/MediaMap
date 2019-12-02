@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { CommentsService, Comment} from 'src/app/services/comments.service';
-import { ListComponent } from '../../shared/list/list.component';
+import { MatPaginator } from '@angular/material';
+import { tap } from 'rxjs/operators';
 @Component({
   selector: 'app-comments-admin',
   templateUrl: './comments.component.html',
@@ -8,7 +9,9 @@ import { ListComponent } from '../../shared/list/list.component';
 })
 export class CommentsAdminComponent implements OnInit {
 
-  public displayedColumns: string[] = ['userName', 'videoId', 'typeDisplay', 'text'];
+  public columns: string[] = ['userName', 'videoId', 'typeDisplay', 'text'];
+  public columnLabels: string[] = ['User', 'Video', 'Type', 'Comment'];
+
   public comments: any;
 
   constructor(

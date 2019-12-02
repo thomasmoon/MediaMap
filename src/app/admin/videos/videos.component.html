@@ -1,9 +1,9 @@
 <h2>Videos</h2>
 
-<app-list
+<app-table
     [rows]="videos | async"
-    [displayedColumns]="displayedColumns">
-</app-list>
+    [columns]="columns">
+</app-table>
 
 <form (ngSubmit)="importExcel()">
 

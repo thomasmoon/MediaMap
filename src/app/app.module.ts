@@ -34,6 +34,7 @@ import {
   MatInputModule,
   MatOptionModule,
   MatPaginatorModule,
+  MatProgressSpinnerModule,
   MatRippleModule,
   MatSelectModule,
   MatTableModule,
@@ -51,7 +52,7 @@ import { VideoComponent } from './course/video/video.component';
 import { CommentsComponent } from './course/comments/comments.component';
 import { VideosComponent } from './admin/videos/videos.component';
 import { CommentsAdminComponent } from './admin/comments/comments.component';
-import { ListComponent } from './shared/list/list.component';
+import { TableComponent } from './shared/table/table.component';
 
 
 @NgModule({
@@ -67,7 +68,7 @@ import { ListComponent } from './shared/list/list.component';
     CommentsComponent,
     VideosComponent,
     CommentsAdminComponent,
-    ListComponent
+    TableComponent
   ],
   imports: [
     AppRoutingModule,
@@ -87,6 +88,7 @@ import { ListComponent } from './shared/list/list.component';
     MatIconModule,
     MatOptionModule,
     MatPaginatorModule,
+    MatProgressSpinnerModule,
     MatFormFieldModule,
     MatInputModule,
     MatRippleModule,

@@ -84,7 +84,7 @@ export class VideoComponent implements OnInit {
     if (this.YTloaded) {
 
       // If the player exists load new video
-      if (this.YTplayer) {
+      if (this.YTplayer && this.YTplayer.loadVideoById) {
         this.YTplayer.loadVideoById(videoId);
       } else {
 

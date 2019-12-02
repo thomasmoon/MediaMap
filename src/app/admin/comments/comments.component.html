@@ -1,7 +1,9 @@
 <h2>Comments</h2>
 
-<app-list
+<app-table
     [rows]="comments | async"
-    [displayedColumns]="displayedColumns">
-</app-list>
+    [columns]="columns"
+    [columnLabels]="columnLabels"
+    >
+</app-table>
 

@@ -11,7 +11,8 @@ import { GeoJson, IGeoJson } from 'src/app/services/map';
 })
 export class VideosComponent implements OnInit {
 
-  public displayedColumns: string[] = ['properties.videoId', 'properties.name'];
+  public columns: string[] = ['properties.videoId', 'properties.name'];
+  public columnLabels: string[] = ['Id', 'Name'];
   public videos: any;
   private excelFile: any;
 
