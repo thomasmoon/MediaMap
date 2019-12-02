@@ -67,7 +67,7 @@ export class MapComponent implements OnInit{
       pitch: this.defaultPitch,
       bearing: this.defaultBearing,
       center: [this.lng, this.lat],
-      trackResize: false
+      trackResize: true
     });
 
     // Disable scroll wheel
