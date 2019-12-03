@@ -1,12 +1,12 @@
 <!-- tools -->
-<mat-tab-group>
+<mat-tab-group [selectedIndex]='tabIndex'>
 
   <!-- Topics -->
   <mat-tab label="Topics">
     <ng-template matTabContent>
         <div class="topics">
             <mat-nav-list class="tasks-list">
-              <a mat-list-item *ngFor="let topic of topics; let i = index" routerLinkActive="active">{{ topic }}</a>
+              <a mat-list-item *ngFor="let topic of topics; let i = index" [routerLink]="['/topic', i]" routerLinkActive="active">{{ topic }}</a>
             </mat-nav-list>
         </div>
     </ng-template>
@@ -17,7 +17,7 @@
       <ng-template matTabContent>
           <div class="methods">
               <mat-nav-list class="methods-list">
-                <a mat-list-item *ngFor="let method of methods; let i = index" routerLinkActive="active">{{ method }}</a>
+                <a mat-list-item *ngFor="let method of methods; let i = index" [routerLink]="['/method', i]" routerLinkActive="active">{{ method }}</a>
               </mat-nav-list>
           </div>
       </ng-template>

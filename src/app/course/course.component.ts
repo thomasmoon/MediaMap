@@ -6,9 +6,7 @@ import { Dialog } from '../dialog/dialog.component';
 import { ToolsComponent } from './tools/tools.component';
 import { MapComponent } from './map/map.component';
 import { VideoComponent } from './video/video.component';
-import { MatSidenav } from '@angular/material';
-import { Observable, of } from 'rxjs';
-import { VideosService, Video } from '../services/videos.service';
+import { VideosService } from '../services/videos.service';
 
 @Component({
   selector: 'app-course',
@@ -36,6 +34,9 @@ export class CourseComponent implements OnInit {
   public locIndexSub: any;
   public videoId;
 
+  public topicIndex: number = null;
+  public methodIndex: number = null;
+
   // Route handling
   routeEventInitiated = false;
   listInitiated = false;
@@ -43,7 +44,7 @@ export class CourseComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private videosService: VideosService
+    public videosService: VideosService
   ) { 
     this.topics = videosService.topics;
     this.methods = videosService.methods;
@@ -72,10 +73,22 @@ export class CourseComponent implements OnInit {
       // This is just getting crazy, so many event leaks
       if (this.videos && this.videos.length) {
 
-        // console.log('Get current location');
-
+        // topic index
+        if (params['topicIndex']) {
+          this.topicIndex = +params['topicIndex'];
+        } else {
+          this.topicIndex = null;
+        }
+      
+        // method index
+        if (params['methodIndex']) {
+          this.methodIndex = +params['methodIndex'];
+        } else {
+          this.methodIndex = null;
+        }
+        
+        // location index
         this.locIndex = +params['locIndex'] - 1; // (+) converts string 'id' to a number
-        // In a real app: dispatch action to load the details here.
 
         // When we have a location
         if (this.videos[this.locIndex]) {

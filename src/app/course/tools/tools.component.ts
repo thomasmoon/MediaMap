@@ -1,5 +1,4 @@
 import { Component, Input, Inject, forwardRef, OnInit } from '@angular/core';
-//import { CourseComponent } from '../course/course.component';
 import * as $ from 'jquery';
 
 @Component({
@@ -14,12 +13,15 @@ export class ToolsComponent implements OnInit {
   @Input() methods: string[];
   @Input() media: string[];
   @Input() authors: string[];
+  @Input() tabIndex: number;
+  @Input() topicIndex: number;
+  @Input() methodIndex: number;
 
   listInitiated = false;
 
   constructor(
-    //@Inject(forwardRef(() => CourseComponent))
-    //private course:CourseComponent
+    /*@Inject(forwardRef(() => CourseComponent))
+    public course:any*/
   ) {
   }
 

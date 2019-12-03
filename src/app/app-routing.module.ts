@@ -11,9 +11,25 @@ import { AdminGuard } from './services/admin.guard';
 import { CommentsAdminComponent } from './admin/comments/comments.component';
 
 
-const routes: Routes = 
-  [{
+const routes: Routes = [
+  {
     path: 'loc/:locIndex',
+    component: CourseComponent
+  },
+  {
+    path: 'topic/:topicIndex',
+    component: CourseComponent
+  },
+  {
+    path: 'topic/:topicIndex/loc/:locIndex',
+    component: CourseComponent
+  },
+  {
+    path: 'method/:methodIndex',
+    component: CourseComponent
+  },
+  {
+    path: 'method/:methodIndex/loc/:locIndex',
     component: CourseComponent
   },
   { path: 'dialog', component: Dialog },

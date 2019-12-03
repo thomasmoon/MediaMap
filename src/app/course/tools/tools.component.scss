@@ -14,3 +14,9 @@ mat-tab-group {
   height: 320px;
   width: 100%;
  }
+
+ .mat-list-item {
+    &.active {
+      background-color: $fd-teal;
+    }
+ }
