@@ -50,8 +50,8 @@ export class VideosComponent implements OnInit {
       // Add each video to Firebase
       rows.forEach(row=>{
 
-          // if import flag is true and youtube url exists
-          if (row[1]==='x' && row[10] !== null) {
+      // if import flag is true and youtube url exists
+      if (row[1] && row[10] !== null) {
 
           let newVideo: IGeoJson = {
 

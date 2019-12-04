@@ -29,6 +29,9 @@ export class CourseComponent implements OnInit {
 
   content = '';
   title = '';
+  currentTopics = [];
+  currentMethods = [];
+  currentKeywords = [];
 
   public locIndex: number;
   public locIndexSub: any;
@@ -110,6 +113,17 @@ export class CourseComponent implements OnInit {
             this.content = "";
           }
           
+          if (this.videos[this.locIndex].properties.hasOwnProperty('topics')
+            && this.videos[this.locIndex].properties.topics !== null) {
+            this.currentTopics = this.videos[this.locIndex].properties.topics.split(',');
+          } else {
+            this.currentTopics = [];
+          }
+
+          this.currentTopics = this.getLocationPropertyAsArray('topics');
+          this.currentMethods = this.getLocationPropertyAsArray('methods');
+          this.currentKeywords = this.getLocationPropertyAsArray('keywords');
+
           let zoom = 16,
               // Default bearing is 0 in 2D mode
               bearing = window['map-world-mode'] !== 1 && this.map ? this.map.defaultBearing : 0;
@@ -169,5 +183,19 @@ export class CourseComponent implements OnInit {
     let id = i+1,
         zeroPadding = id < 10 ? '0':'';
     return zeroPadding + id;
+  }
+
+  // if the location has this property parse string to array
+  getLocationPropertyAsArray(prop: string) {
+
+    let value = [];
+
+    if (this.videos[this.locIndex].properties.hasOwnProperty(prop)
+      && this.videos[this.locIndex].properties[prop] !== null) {
+
+      value = this.videos[this.locIndex].properties[prop].split(',');
+    }
+
+    return value;
   }
 }

@@ -9,6 +9,9 @@ export class ContentComponent implements OnInit {
 
   @Input() title: string;
   @Input() content: string;
+  @Input() topics: string[];
+  @Input() methods: string[];
+  @Input() keywords: string[];
 
   constructor() { }
 
