@@ -35,14 +35,6 @@ export class AppComponent implements OnInit {
       route: '/'
     },
     {
-      id: 'uni',
-      icon: 'school',
-      text: 'University of Helsinki',
-      info: '(coming soon)',
-      route: '/'
-    },
-    /*
-    {
       id: 'facebook',
       icon: 'thumb_up',
       text: 'Facebook',
@@ -59,7 +51,14 @@ export class AppComponent implements OnInit {
       icon: 'people',
       text: 'Github',
       route: '/'
-    },*/
+    },
+    {
+      id: 'uni',
+      icon: 'school',
+      text: 'University of Helsinki',
+      info: '(coming soon)',
+      route: '/'
+    },
   ];
 
 
