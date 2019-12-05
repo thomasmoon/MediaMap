@@ -20,6 +20,8 @@ export class CommentsComponent implements OnInit {
 
   public course: any;
 
+  //@Input() videoId: any;
+
   public videoId: number; 
   private videoIndex$: any;
   public videoIndex: number;
@@ -41,14 +43,10 @@ export class CommentsComponent implements OnInit {
 
     this.initComment();
 
-    this.videoIndex$ = this.route.params.subscribe(params => {
+    this.videoIndex$ = this.course.videoIdObs.subscribe(videoId => {
 
-      this.videoIndex = +params['locIndex'] - 1; // + cast as number
-      // console.log('Video id: ' + this.videoId);
-      
-      if (typeof this.videoIndex != 'undefined') {
-        this.commentsService.loadByVideo(this.videoIndex);
-      }
+      this.videoId = videoId;
+      this.commentsService.loadByVideo(this.videoId);
     })
   }
 

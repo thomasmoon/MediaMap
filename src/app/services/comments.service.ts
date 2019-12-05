@@ -150,10 +150,10 @@ export class CommentsService {
     }, error => console.log('Could not load comments.'));
   }
 
-  loadByVideo(videoIndex: number) {
+  loadByVideo(videoId: any) {
 
     let filters = {
-      videoIndex: videoIndex
+      videoId: videoId
     }
 
     //console.log("Load coments for video");

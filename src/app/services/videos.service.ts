@@ -49,6 +49,7 @@ export class VideosService {
   methods = ['Focus Group Discussion', 'Personal Interview', 'Household Interview', 'Field Measurement', 'Historical Data'];
   methodsNew = [
     {slug: 'focus-group-discussion', name: 'Focus Group Discussion'},
+    {slug: 'key-informant-interview', name: 'Key Informant Interview'},
     {slug: 'personal-interview', name: 'Personal Interview'},
     {slug: 'household-interview', name: 'Household Interview'},
     {slug: 'group-interview', name: 'Group Interview'},
@@ -68,9 +69,6 @@ export class VideosService {
   }
 
   loadAll(filters:object = null) {
-
-
-    console.log('load all', filters);
 
     this.db.collection<GeoJson>('videos').valueChanges({ idField: 'id' }).subscribe(data => {     
       

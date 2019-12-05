@@ -9,7 +9,7 @@
   <!-- Topics-->
   <ng-container *ngIf="topics?.length">
     <h2>Topics</h2>
-    <mat-chip-list *ngIf="topics?.length > 0">
+    <mat-chip-list>
         <mat-chip color="secondary" selected="true" *ngFor="let topic of topics;">{{topic}}</mat-chip>
     </mat-chip-list>
   </ng-container>
@@ -17,7 +17,7 @@
   <!-- Methods-->
   <ng-container *ngIf="methods?.length">
     <h2>Methods</h2>
-    <mat-chip-list *ngIf="methods?.length > 0">
+    <mat-chip-list>
         <mat-chip color="secondary" selected="true" *ngFor="let method of methods;">{{methods}}</mat-chip>
     </mat-chip-list>
   </ng-container>

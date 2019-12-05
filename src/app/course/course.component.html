@@ -27,8 +27,8 @@
 
           <mat-nav-list class="locations-list">
             <a mat-list-item
-            [routerLink]="['/loc', i+1]"
-            *ngFor="let video of videos; let i = index"
+            [routerLink]="getRouterLink(i)"
+            *ngFor="let video of videosFiltered; let i = index"
             routerLinkActive="active"
             >
             <span class="videoId">{{ video.properties.videoId }}</span>

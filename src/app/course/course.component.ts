@@ -7,6 +7,7 @@ import { ToolsComponent } from './tools/tools.component';
 import { MapComponent } from './map/map.component';
 import { VideoComponent } from './video/video.component';
 import { VideosService } from '../services/videos.service';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-course',
@@ -24,6 +25,7 @@ export class CourseComponent implements OnInit {
   // Tools (Locations & Tasks)
   locations: any;
   videos: any;
+  videosFiltered: any;
   topics: string[];
   topicsNew: {}[];
   methods: string[];
@@ -38,6 +40,10 @@ export class CourseComponent implements OnInit {
   public locIndex: number;
   public locIndexSub: any;
   public videoId;
+  public videoIdSub: any;
+
+  private _videoId = new BehaviorSubject<any>(null);
+  readonly videoIdObs = this._videoId.asObservable();
 
   public topicIndex: number = null;
   public methodIndex: number = null;
@@ -80,9 +86,16 @@ export class CourseComponent implements OnInit {
       // This is just getting crazy, so many event leaks
       if (this.videos && this.videos.length) {
 
+        this.videosFiltered = this.videos;
+
         // topic index
         if (params['topicIndex']) {
           this.topicIndex = params['topicIndex'];
+          this.videosFiltered = this.videosFiltered.filter(video => {
+            if (video.properties.topics && video.properties.topics.search(this.topicIndex) > -1) {
+              return true;
+            }
+          });
         } else {
           this.topicIndex = null;
         }
@@ -90,36 +103,43 @@ export class CourseComponent implements OnInit {
         // method index
         if (params['methodIndex']) {
           this.methodIndex = params['methodIndex'];
+          this.videosFiltered = this.videosFiltered.filter(video => {
+            if (video.properties.methods && video.properties.methods.search(this.methodIndex) > -1) {
+              return true;
+            }
+          });
         } else {
           this.methodIndex = null;
         }
-        
+
         // location index
         this.locIndex = +params['locIndex'] - 1; // (+) converts string 'id' to a number
 
         // When we have a location
-        if (this.videos[this.locIndex]) {
+        if (this.videosFiltered[this.locIndex]) {
 
-          this.videoId = this.videos[this.locIndex].properties.videoId;
+          this.videoId = this.videosFiltered[this.locIndex].properties.videoId;
+
+          this._videoId.next(this.videoId);
 
           // We only need to do it once
           //this.routeEventInitiated = true;
 
-          if (this.videos[this.locIndex].properties.hasOwnProperty('name')) {
-            this.title = this.videos[this.locIndex].properties.name;
+          if (this.videosFiltered[this.locIndex].properties.hasOwnProperty('name')) {
+            this.title = this.videosFiltered[this.locIndex].properties.name;
           } else {
             this.title = "";
           }
 
-          if (this.videos[this.locIndex].properties.hasOwnProperty('description')) {
-            this.content = this.videos[this.locIndex].properties.description;
+          if (this.videosFiltered[this.locIndex].properties.hasOwnProperty('description')) {
+            this.content = this.videosFiltered[this.locIndex].properties.description;
           } else {
             this.content = "";
           }
           
-          if (this.videos[this.locIndex].properties.hasOwnProperty('topics')
-            && this.videos[this.locIndex].properties.topics !== null) {
-            this.currentTopics = this.videos[this.locIndex].properties.topics.split(',');
+          if (this.videosFiltered[this.locIndex].properties.hasOwnProperty('topics')
+            && this.videosFiltered[this.locIndex].properties.topics !== null) {
+            this.currentTopics = this.videosFiltered[this.locIndex].properties.topics.split(',');
           } else {
             this.currentTopics = [];
           }
@@ -133,20 +153,20 @@ export class CourseComponent implements OnInit {
               bearing = window['map-world-mode'] !== 1 && this.map ? this.map.defaultBearing : 0;
 
           // custom bearing if in 3D map mode
-          if (this.videos[this.locIndex].properties.hasOwnProperty('bearing') && window['map-world-mode'] !== 1) {
-            bearing = this.videos[this.locIndex].properties.bearing;
+          if (this.videosFiltered[this.locIndex].properties.hasOwnProperty('bearing') && window['map-world-mode'] !== 1) {
+            bearing = this.videosFiltered[this.locIndex].properties.bearing;
           }
 
           // custom zoom
-          if (this.videos[this.locIndex].hasOwnProperty('zoom')) {
-            zoom = this.videos[this.locIndex].properties.zoom;
+          if (this.videosFiltered[this.locIndex].hasOwnProperty('zoom')) {
+            zoom = this.videosFiltered[this.locIndex].properties.zoom;
           }
 
           this.map.currentBearing = bearing;
           this.map.map.setBearing(bearing);
 
           // Fly to the location with given zoom
-          this.map.flyTo(this.videos[this.locIndex], zoom);
+          this.map.flyTo(this.videosFiltered[this.locIndex], zoom);
 
           // if  mobile
           if(false && window.innerWidth <= 640) {
@@ -160,7 +180,7 @@ export class CourseComponent implements OnInit {
 
           } else {
             // play without delay
-            this.video.playVideo(this.videos[this.locIndex].properties.youtubeId);
+            this.video.playVideo(this.videosFiltered[this.locIndex].properties.youtubeId);
           }
           
         }
@@ -174,7 +194,7 @@ export class CourseComponent implements OnInit {
 
   nextLocation() {
     // If we have additional locations then go to the next one
-    if (this.locIndex < this.videos.length - 1) {
+    if (this.locIndex < this.videosFiltered.length - 1) {
       this.locIndex++;
       this.routeEventInitiated = false;
 
@@ -202,12 +222,22 @@ export class CourseComponent implements OnInit {
 
     let value = [];
 
-    if (this.videos[this.locIndex].properties.hasOwnProperty(prop)
-      && this.videos[this.locIndex].properties[prop] !== null) {
+    if (this.videosFiltered[this.locIndex].properties.hasOwnProperty(prop)
+      && this.videosFiltered[this.locIndex].properties[prop] !== null) {
 
-      value = this.videos[this.locIndex].properties[prop].split(',');
+      value = this.videosFiltered[this.locIndex].properties[prop].split(',');
     }
 
     return value;
+  }
+
+  getRouterLink(index) {
+    if (this.topicIndex) {
+      return ['/topic', this.topicIndex, 'loc', index+1];
+    } else if (this.methodIndex) {
+      return ['/method', this.methodIndex, 'loc', index+1];
+    } else {
+      return ['/loc', index+1];
+    }
   }
 }
