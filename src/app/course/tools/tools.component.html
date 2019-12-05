@@ -6,7 +6,7 @@
     <ng-template matTabContent>
         <div class="topics">
             <mat-nav-list class="tasks-list">
-              <a mat-list-item *ngFor="let topic of topics; let i = index" [routerLink]="['/topic', i]" routerLinkActive="active">{{ topic }}</a>
+              <a mat-list-item *ngFor="let topic of topicsNew; let i = index" [routerLink]="['/topic', topic.slug]" routerLinkActive="active">{{ topic.name }}</a>
             </mat-nav-list>
         </div>
     </ng-template>
@@ -17,7 +17,7 @@
       <ng-template matTabContent>
           <div class="methods">
               <mat-nav-list class="methods-list">
-                <a mat-list-item *ngFor="let method of methods; let i = index" [routerLink]="['/method', i]" routerLinkActive="active">{{ method }}</a>
+                <a mat-list-item *ngFor="let method of methodsNew; let i = index" [routerLink]="['/method', method.slug]" routerLinkActive="active">{{ method.name }}</a>
               </mat-nav-list>
           </div>
       </ng-template>

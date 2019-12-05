@@ -25,7 +25,9 @@ export class CourseComponent implements OnInit {
   locations: any;
   videos: any;
   topics: string[];
+  topicsNew: {}[];
   methods: string[];
+  methodsNew: {}[];
 
   content = '';
   title = '';
@@ -50,7 +52,9 @@ export class CourseComponent implements OnInit {
     public videosService: VideosService
   ) { 
     this.topics = videosService.topics;
+    this.topicsNew = videosService.topicsNew;
     this.methods = videosService.methods;
+    this.methodsNew = videosService.methodsNew;
   }
 
   ngOnInit() {
@@ -78,14 +82,14 @@ export class CourseComponent implements OnInit {
 
         // topic index
         if (params['topicIndex']) {
-          this.topicIndex = +params['topicIndex'];
+          this.topicIndex = params['topicIndex'];
         } else {
           this.topicIndex = null;
         }
       
         // method index
         if (params['methodIndex']) {
-          this.methodIndex = +params['methodIndex'];
+          this.methodIndex = params['methodIndex'];
         } else {
           this.methodIndex = null;
         }
@@ -173,7 +177,15 @@ export class CourseComponent implements OnInit {
     if (this.locIndex < this.videos.length - 1) {
       this.locIndex++;
       this.routeEventInitiated = false;
-      this.router.navigate(['/loc', this.locIndex + 1])
+
+      if (this.topicIndex !== null) {
+        this.router.navigate([`/topic/${this.topicIndex}/loc`, this.locIndex + 1]);
+      } else if (this.methodIndex !== null) {
+        this.router.navigate([`/method/${this.methodIndex}/loc`, this.locIndex + 1]);
+      } else {
+        this.router.navigate(['/loc', this.locIndex + 1])
+      }
+      
       this.updateView();
     }
   }

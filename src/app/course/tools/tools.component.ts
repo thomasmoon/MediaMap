@@ -10,7 +10,9 @@ export class ToolsComponent implements OnInit {
 
   @Input() locations: any;
   @Input() topics: string[];
+  @Input() topicsNew: {}[];
   @Input() methods: string[];
+  @Input() methodsNew: {}[];
   @Input() media: string[];
   @Input() authors: string[];
   @Input() tabIndex: number;

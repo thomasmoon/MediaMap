@@ -39,7 +39,22 @@ export class VideosService {
   readonly videos = this._videos.asObservable();
 
   topics = ['Value-Chain Analysis', 'Livelihoods', 'Environmental Change', 'Forest Inventory', 'Biodiversity'];
+  topicsNew = [
+    {slug: 'value-chain', name: 'Value-Chain Analysis'},
+    {slug: 'livelihoods', name: 'Livelihoods'},
+    {slug: 'env-change', name: 'Environmental Change'},
+    {slug: 'forest-inventory', name: 'Forest Inventory'},
+    {slug: 'biodiversity', name: 'Biodiversity'},
+  ]
   methods = ['Focus Group Discussion', 'Personal Interview', 'Household Interview', 'Field Measurement', 'Historical Data'];
+  methodsNew = [
+    {slug: 'focus-group-discussion', name: 'Focus Group Discussion'},
+    {slug: 'personal-interview', name: 'Personal Interview'},
+    {slug: 'household-interview', name: 'Household Interview'},
+    {slug: 'group-interview', name: 'Group Interview'},
+    {slug: 'field-measurement', name: 'Field Measurement'}
+  ]
+  
   media = ['360°', 'Photos', 'Videos', 'Timelapse', 'Podcasts'];
   authors = ['Thomas Moon', 'Adrián Monge'];
 
@@ -53,6 +68,10 @@ export class VideosService {
   }
 
   loadAll(filters:object = null) {
+
+
+    console.log('load all', filters);
+
     this.db.collection<GeoJson>('videos').valueChanges({ idField: 'id' }).subscribe(data => {     
       
       // Augment data with display fields (done here so front, ie. tables can be dumb)
@@ -79,6 +98,10 @@ export class VideosService {
           for (const filter in filters) {
 
             //console.log(`Match by ${filter} = ${filters[filter]}`);
+
+            if (filter === 'topics' && item[filter]) {
+              console.log(item[filter].search(filters[filter]));
+            }
             
             if (item[filter] === filters[filter]) {
               //console.log("Matched");

@@ -47,7 +47,16 @@ export class MapComponent implements OnInit{
 
   ngOnInit() {
     this.markers = this.videosService.videos;
-    this.videosService.loadAll();
+
+    let filters: any = {};
+
+    if (this.course.topicIndex !== null) {
+      filters.topics = this.course.topicIndex;
+    } else if (this.course.methodIndex !== null) {
+      filters.methods = this.course.methodIndex;
+    }
+      
+    this.videosService.loadAll(filters);
   }
 
   ngAfterViewInit() {
