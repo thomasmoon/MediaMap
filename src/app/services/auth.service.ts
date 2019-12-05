@@ -35,7 +35,7 @@ export class AuthService {
     // This asyc subscription is used by auth guards
     this.user$ = Observable.create(observer => {
 
-      console.log('started new async process for user');
+      //console.log('started new async process for user');
 
       // Get auth data, then firestore user document or null
       this.afAuth.authState.subscribe(user => {
@@ -87,11 +87,11 @@ export class AuthService {
         provider = new auth.GoogleAuthProvider;
         break;
       case 'twitter':
-        provider = new auth.GithubAuthProvider;
+        provider = new auth.TwitterAuthProvider;
         break;
       case 'github':
-          provider = new auth.GithubAuthProvider;
-          break;
+        provider = new auth.GithubAuthProvider;
+        break;
     }
 
     if (provider) {

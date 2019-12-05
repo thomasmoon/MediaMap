@@ -78,6 +78,8 @@ mat-sidenav-container {
     .sidebar-bottom {
       padding-bottom: 1rem;
     }
+
+    a { position: absolute; bottom: 32px; left: 16px; }
   
     .mat-list {
       display: flex;

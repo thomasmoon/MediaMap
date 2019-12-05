@@ -57,17 +57,20 @@
         </mat-toolbar>
   
         <!-- Login methods -->
-        <mat-list *ngIf="!auth.user">
-          <mat-card-subtitle>LOGIN METHODS</mat-card-subtitle>
+        <ng-container *ngIf="!auth.user">
+          <mat-list>
+            <mat-card-subtitle>LOGIN METHODS</mat-card-subtitle>
 
-          <mat-action-list>
-              <button mat-list-item (click)="auth.login(item.id)" *ngFor="let item of loginItems">
-                <mat-icon mat-list-icon>{{item.icon}}</mat-icon>
-                <h4 mat-line>{{item.text}}</h4>
-                <p mat-line>{{item.info}}</p>
-              </button>
-            </mat-action-list>
-        </mat-list>
+            <mat-action-list>
+                <button mat-list-item (click)="auth.login(item.id)" *ngFor="let item of loginItems">
+                  <mat-icon mat-list-icon>{{item.icon}}</mat-icon>
+                  <h4 mat-line>{{item.text}}</h4>
+                  <p mat-line>{{item.info}}</p>
+                </button>
+              </mat-action-list>
+          </mat-list>
+          <a href="/privacy">Privacy Policy</a>
+      </ng-container>
   
         <!-- Menu -->
         <mat-list *ngIf="auth.user">

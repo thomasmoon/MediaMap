@@ -33,13 +33,13 @@ export class AppComponent implements OnInit {
       icon: 'email',
       text: 'Google',
       route: '/'
-    },
+    },/*
     {
       id: 'facebook',
       icon: 'thumb_up',
       text: 'Facebook',
       route: '/'
-    },
+    },*/
     {
       id: 'twitter',
       icon: 'chat',
@@ -67,6 +67,11 @@ export class AppComponent implements OnInit {
       icon: 'menu_book',
       text: 'Course Content',
       route: '/'
+    },
+    {
+      icon: 'lock',
+      text: 'Privacy',
+      route: '/privacy'
     }
   ]
 
