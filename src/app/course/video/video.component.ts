@@ -80,14 +80,22 @@ export class VideoComponent implements OnInit {
 
   playVideo(videoId: string) {
 
+    console.log('playVideo');
+
      // if the Youtube API is loaded
     if (this.YTloaded) {
 
+      console.log('YouTube API is loaded');
+
       // If the player exists load new video
       if (this.YTplayer && this.YTplayer.loadVideoById) {
+
+        console.log('YouTube player exists');
+
         this.YTplayer.loadVideoById(videoId);
       } else {
 
+        console.log('Create Youtube player');
         this.YTparams.videoId = videoId;
 
         // Create new player
@@ -96,10 +104,13 @@ export class VideoComponent implements OnInit {
 
       // When video is playing begin the routine to get bearing
       if (!this.YTbearingRoutineInitiated) {
+        console.log('Get video bearing');
         this.getVideoBearing();
       }
 
     } else {
+
+      console.log('Load Youtube api');
 
       this.loadYoutubeApi();
 

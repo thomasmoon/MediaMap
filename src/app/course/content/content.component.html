@@ -6,6 +6,8 @@
   <!-- Description-->
   <p>{{content}}</p>
 
+  <p *ngIf=videoId>Video {{videoId}}</p>
+
   <!-- Topics-->
   <ng-container *ngIf="topics?.length">
     <h2>Topics</h2>
@@ -16,9 +18,9 @@
 
   <!-- Methods-->
   <ng-container *ngIf="methods?.length">
-    <h2>Methods</h2>
+    <h2>Research Methods</h2>
     <mat-chip-list>
-        <mat-chip color="secondary" selected="true" *ngFor="let method of methods;">{{methods}}</mat-chip>
+        <mat-chip color="secondary" selected="true" *ngFor="let method of methods;">{{method}}</mat-chip>
     </mat-chip-list>
   </ng-container>
 
@@ -29,7 +31,6 @@
         <mat-chip color="secondary" *ngFor="let keyword of keywords;">{{keyword}}</mat-chip>
     </mat-chip-list>
   </ng-container>
-  
 </div>
   
     <!--

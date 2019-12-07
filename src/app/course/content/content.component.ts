@@ -7,6 +7,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class ContentComponent implements OnInit {
 
+  @Input() videoId: string;
   @Input() title: string;
   @Input() content: string;
   @Input() topics: string[];

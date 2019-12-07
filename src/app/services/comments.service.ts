@@ -142,8 +142,8 @@ export class CommentsService {
         return commentsByUser[userId];
       })
 
-      console.log("Output commentsByUser");
-      console.log(this.dataStore.commentsByUser);
+      //console.log("Output commentsByUser");
+      //console.log(this.dataStore.commentsByUser);
 
       this._commentsByUser.next(Object.assign({}, this.dataStore).commentsByUser);
 

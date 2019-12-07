@@ -31,19 +31,9 @@
             *ngFor="let video of videosFiltered; let i = index"
             routerLinkActive="active"
             >
-            <span class="videoId">{{ video.properties.videoId }}</span>
             <span class="name">{{ video.properties.name }}</span>
             </a>
           </mat-nav-list>
-
-          <!--
-          <mat-nav-list class="locations-list" *ngIf=false>
-              <a mat-list-item
-              [routerLink]="['/loc', i+1]"
-              *ngFor="let loc of locations; let i = index"
-              routerLinkActive="active"
-              >{{ loc.properties.name }}</a>
-            </mat-nav-list>-->
       </div>
     </div>
 
@@ -62,7 +52,7 @@
     </div>
 
     <!-- Content -->
-    <app-content [content]=content [title]=title [topics]="currentTopics" [methods]="currentMethods" [keywords]="currentKeywords">
+    <app-content [videoId]=videoId [content]=content [title]=title [topics]="currentTopics" [methods]="currentMethods" [keywords]="currentKeywords">
     </app-content>
   
     <!-- Comments -->

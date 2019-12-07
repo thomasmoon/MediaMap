@@ -116,11 +116,9 @@ table {
       .name {
         flex-grow: 1;
       }
-    }
-  }
-
-  mat-list-item {
-    &.active {
+  
+      &.active {
         background-color: $fd-teal;
+      }
     }
   }

@@ -45,6 +45,10 @@ export class CourseComponent implements OnInit {
   private _videoId = new BehaviorSubject<any>(null);
   readonly videoIdObs = this._videoId.asObservable();
 
+  // video index for children (e.g. comments)
+  private _videoIndex = new BehaviorSubject<any>(null);
+  readonly videoIndexObs = this._videoIndex.asObservable();
+
   public topicIndex: number = null;
   public methodIndex: number = null;
 
@@ -113,10 +117,13 @@ export class CourseComponent implements OnInit {
         }
 
         // location index
-        this.locIndex = +params['locIndex'] - 1; // (+) converts string 'id' to a number
+        this.locIndex = +params['locIndex']; // (+) converts string 'id' to a number
 
         // When we have a location
         if (this.videosFiltered[this.locIndex]) {
+
+          // dispatch the location
+          this._videoIndex.next(this.locIndex);
 
           this.videoId = this.videosFiltered[this.locIndex].properties.videoId;
 
@@ -199,11 +206,11 @@ export class CourseComponent implements OnInit {
       this.routeEventInitiated = false;
 
       if (this.topicIndex !== null) {
-        this.router.navigate([`/topic/${this.topicIndex}/loc`, this.locIndex + 1]);
+        this.router.navigate([`/topic/${this.topicIndex}/loc`, this.locIndex]);
       } else if (this.methodIndex !== null) {
-        this.router.navigate([`/method/${this.methodIndex}/loc`, this.locIndex + 1]);
+        this.router.navigate([`/method/${this.methodIndex}/loc`, this.locIndex]);
       } else {
-        this.router.navigate(['/loc', this.locIndex + 1])
+        this.router.navigate(['/loc', this.locIndex])
       }
       
       this.updateView();
@@ -233,11 +240,11 @@ export class CourseComponent implements OnInit {
 
   getRouterLink(index) {
     if (this.topicIndex) {
-      return ['/topic', this.topicIndex, 'loc', index+1];
+      return ['/topic', this.topicIndex, index];
     } else if (this.methodIndex) {
-      return ['/method', this.methodIndex, 'loc', index+1];
+      return ['/method', this.methodIndex, index];
     } else {
-      return ['/loc', index+1];
+      return ['/loc', index];
     }
   }
 }

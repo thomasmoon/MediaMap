@@ -18,25 +18,25 @@ const routes: Routes = [
   },
   {
     path: 'topic/:topicIndex',
-    component: CourseComponent
+    redirectTo: 'topic/:topicIndex/0', pathMatch: 'full' 
   },
   {
-    path: 'topic/:topicIndex/loc/:locIndex',
+    path: 'topic/:topicIndex/:locIndex',
     component: CourseComponent
   },
   {
     path: 'method/:methodIndex',
-    component: CourseComponent
+    redirectTo: 'method/:methodIndex/0', pathMatch: 'full' 
   },
   {
-    path: 'method/:methodIndex/loc/:locIndex',
+    path: 'method/:methodIndex/:locIndex',
     component: CourseComponent
   },
   { path: 'dialog', component: Dialog },
   { path: 'admin/videos', component: VideosComponent, canActivate: [AdminGuard] },
   { path: 'admin/comments', component: CommentsAdminComponent, canActivate: [AdminGuard] },
   { path: 'privacy', component: PrivacyComponent },
-  { path: '', redirectTo: 'loc/1', pathMatch: 'full' }
+  { path: '', redirectTo: 'loc/0', pathMatch: 'full' }
 ]
 
 @NgModule({
