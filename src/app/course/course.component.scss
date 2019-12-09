@@ -155,8 +155,6 @@ $fd-dark-grey: #363636;
 @media (max-width: 640px){
 
   .courseSidenav {
-    padding-right: 2rem;
-    //position: relative;
     transform: translate3d(-220px,0,0);
     width: 252px;
     min-width: 252px;
