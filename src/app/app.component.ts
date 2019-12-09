@@ -100,9 +100,6 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-
-    this.sidenavService.setSidenav(this.sidenav);
-
     this.pageParams = this.route
     .queryParams
     .subscribe(params => {
@@ -111,19 +108,24 @@ export class AppComponent implements OnInit {
     });
   }
 
-  public courseSidenavToggle() {
-
-    if (window.innerWidth <= 600) {
-      this.courseSidenavService.toggle();
-    }
+  ngAfterViewInit() {
+    this.sidenavService.setSidenav(this.sidenav);
   }
 
-  public courseSidenavLink() {
+  public courseHeaderClick(event) {
 
-    if (window.innerWidth > 600) {
-      return ['/'];
+    //console.log('course Header click');
+    //console.log(this.courseSidenavService.isLoaded());
+
+    // on the course page, toggle the content menu on small screens
+    if (window.innerWidth <= 600
+      && this.courseSidenavService.isLoaded()) {
+
+      event.preventDefault();
+
+      this.courseSidenavService.toggle();
     } else {
-      return null;
+      this.router.navigate['/'];
     }
   }
 }

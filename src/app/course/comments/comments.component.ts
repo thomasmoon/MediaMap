@@ -34,7 +34,7 @@ export class CommentsComponent implements OnInit {
   constructor(
     @Inject(forwardRef(() => CourseComponent)) course,
     public auth: AuthService,
-    private sidenav: SidenavService,
+    private sidenavService: SidenavService,
     private commentsService: CommentsService,
     private route: ActivatedRoute
   ) { 
@@ -75,6 +75,7 @@ export class CommentsComponent implements OnInit {
 
     if (!data.hasOwnProperty('id')) {
 
+      /*
       console.log('Loc index');
       console.log(this.course.locIndex);
 
@@ -84,17 +85,17 @@ export class CommentsComponent implements OnInit {
       console.log('Video index');
       console.log(this.videoIndex);
 
-      console.log(this.course.videosFiltered);
+      console.log(this.course.videosFiltered);*/
 
       data.videoIndex = this.videoIndex;
       data.videoId = this.course.videosFiltered[this.videoIndex].properties.videoId;
       data.videoName = this.course.videosFiltered[this.videoIndex].properties.name;
 
-      console.log('Add comment');
+      //console.log('Add comment');
       this.commentsService.add(data);
     } else {
 
-      console.log('Update comment');
+      //console.log('Update comment');
       this.commentsService.update(data);
     }
 
@@ -122,5 +123,9 @@ export class CommentsComponent implements OnInit {
         this.commentsService.delete(commentId);
       }
     });
+  }
+
+  public login() {
+    this.sidenavService.open();
   }
 }

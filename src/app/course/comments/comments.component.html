@@ -1,7 +1,7 @@
 <!-- Login to view comments-->
 <ng-container *ngIf="auth.user === null">
   <p>Please login to view comments.</p>
-  <button mat-stroked-button (click)="sidenav.open()">LOGIN</button>
+  <button mat-stroked-button (click)="login()">LOGIN</button>
 </ng-container>
 
 <!-- Expert Review Form -->

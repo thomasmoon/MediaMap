@@ -30,4 +30,8 @@ export class CourseSidenavService {
   public isOpen(): boolean {
     return this.sidenav.opened;
   }
+
+  public isLoaded(): boolean {
+    return typeof this.sidenav !== 'undefined';
+  }
 }
