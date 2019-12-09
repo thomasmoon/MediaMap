@@ -32,6 +32,13 @@ form {
 }
 
 mat-list-item {
+
+  height: auto !important;
+
+  &:not(:last-child) {
+    border-bottom: solid 1px #e0e0e0;
+  }
+
   .mat-list-avatar {
     align-self: flex-start;
   }

@@ -7,6 +7,17 @@ mat-toolbar.mat-primary {
         flex-grow: 1;
     }
 
+    .title {
+      color: white;
+      text-decoration: none;
+
+      @media (max-width: 640px){
+        .title-extra {
+          display: none;
+        }
+      }
+    }
+
     .user {
 
         display: flex;

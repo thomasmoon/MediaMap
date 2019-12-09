@@ -1,46 +1,64 @@
-<div class="row-1">
+<mat-sidenav-container class="row-1">
 
-  <div class="videos">
+  <!-- sidebar -->
+  <mat-sidenav class="courseSidenav" #courseSidenav [mode]=courseSidenavMode() [opened]=courseSidenavOpened() position="start">
 
-    <div class="left">
+    <div class="courseNav">
+      <!-- nav level 1-->
+      <div class="filters left">
 
-      <h2>Filters</h2>
+        <!-- Tools -->
+        <app-tools 
+          [locations]=locations
+          [topics]=topics
+          [topicsNew]=topicsNew
+          [methods]=methods
+          [methodsNew]=methodsNew
+          [tabIndex]="methodIndex!==null?1:0"
+          [topicIndex]="topicIndex"
+          [methodIndex]="methodIndex"
+          [locIndex]="locIndex"
+          ></app-tools>
+      </div>
 
-      <!-- Tools -->
-      <app-tools 
-        [locations]=locations
-        [topics]=topics
-        [topicsNew]=topicsNew
-        [methods]=methods
-        [methodsNew]=methodsNew
-        [tabIndex]="methodIndex!==null?1:0"
-        [topicIndex]="topicIndex"
-        [methodIndex]="methodIndex"
-        ></app-tools>
-    </div>
+      <div class="content-panel">
 
-    <div class="content-panel">
+        <!-- nav level 2 
+        <mat-tab-group class="locations">
 
-      <div class="locations">
+          <!-- Videos
+          <mat-tab label="Videos">
+            <ng-template matTabContent>-->
 
-          <h2>Videos</h2>
-
-          <mat-nav-list class="locations-list">
-            <a mat-list-item
-            [routerLink]="getRouterLink(i)"
-            *ngFor="let video of videosFiltered; let i = index"
-            routerLinkActive="active"
-            >
-            <span class="name">{{ video.properties.name }}</span>
-            </a>
-          </mat-nav-list>
+              <mat-nav-list class="locations-list">
+                <mat-card-subtitle>
+                  <mat-icon>videocam</mat-icon>
+                  360° VIDEOS
+                </mat-card-subtitle>
+                <a mat-list-item
+                  [routerLink]="getRouterLink(i+1)"
+                  *ngFor="let video of videosFiltered; let i = index"
+                  routerLinkActive="active"
+                  >
+                  <span class="index">{{ i + 1}}.</span>
+                  <span class="name">{{ video.properties.name }}</span>
+                </a>
+              </mat-nav-list>
+            <!--</ng-template>
+          </mat-tab>
+        </mat-tab-group>
+        <!-- end nav level 2 -->
       </div>
     </div>
+    <div class="tab" (click)=courseSidenavService.toggle()>
+      <mat-card-subtitle>
+          <mat-icon>menu_book</mat-icon>
+          COURSE CONTENT
+        </mat-card-subtitle>
+    </div>
+  </mat-sidenav>
 
-  </div>
-
-  <div class="location-row">
-
+  <mat-sidenav-content>
     <div class="video-row">
 
       <!-- Video -->
@@ -58,9 +76,9 @@
     <!-- Comments -->
     <app-comments></app-comments>
 
-  </div>
+  </mat-sidenav-content>
 
-</div>
+</mat-sidenav-container>
 
 
 <!-- Dialog -->

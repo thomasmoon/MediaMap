@@ -18,6 +18,8 @@ export class MapComponent implements OnInit{
   // Refs
   course: any;
 
+  updateViewOnce: boolean = false;
+
   // Default settings for Map
   map: mapboxgl.Map;
   style = 'mapbox://styles/mapbox/outdoors-v10';
@@ -96,14 +98,12 @@ export class MapComponent implements OnInit{
     // Click Marker
     this.map.on('click', 'locations', function (e: mapboxgl.event) {
 
-      var coordinates = e.features[0].geometry.coordinates.slice();
-
       this.flyTo(e.features[0]);
 
       this.routeEventInitiated = false;
       this.listInitiated = false;
       
-      this.course.router.navigate(['/loc', e.features[0].properties.index+1])
+      this.course.router.navigate(['/videoId', e.features[0].properties.videoId])
 
     }.bind(this));
 
@@ -125,11 +125,18 @@ export class MapComponent implements OnInit{
       /// subscribe to realtime database and set data source
       this.markers.subscribe(markers => {
 
-        this.course.videos = markers;
-        this.course.updateView();
+        //console.log('Subscribe to markers');
+        //console.log(markers);
 
-        let data = new FeatureCollection(markers)
-        this.source.setData(data)
+        // If we have markers fire up the course and map locations, once only
+        if (markers.length && !this.updateViewOnce) {
+          this.updateViewOnce = true;
+          this.course.videos = markers;
+          this.course.updateView();
+
+          let data = new FeatureCollection(markers)
+          this.source.setData(data);
+        }
       });
 
       /*

@@ -61,7 +61,7 @@
 
 
 <!-- Comment List -->
-<mat-list *ngIf="auth.user">
+<mat-list *ngIf="auth.user" class="comments-list">
     <mat-list-item *ngFor="let user of commentsByUser | async">
       <img matListAvatar src="{{user.userPhoto}}" alt="{{user.userName}}">
       <h3 matLine class="comment-user"> {{user.userName}} </h3>

@@ -6,66 +6,80 @@ $fd-teal: #B0D9D8;
 $fd-dark-grey: #363636;
 
 body, html {
-    background-color: #ffffff;
-    font-family: Roboto, sans-serif;
-    padding: 0;
-    margin: 0;
+  background-color: #ffffff;
+  font-family: Roboto, sans-serif;
+  padding: 0;
+  margin: 0;
 }
 
 html {
-    height: 100%;
+  height: 100%;
 }
 
 body {
-    min-height: 640px;
-    position: relative;
+  min-height: 640px;
+  position: relative;
 }
 
 table {
-    width: 100%;
+  width: 100%;
+}
+
+h1 {
+  font-size: 1.75rem;
+
+  @media (max-width: 640px){
+    font-size: 1.25rem;
+  }
+}
+
+h2 {
+
+  @media (max-width: 640px){
+    font-size: 1.125rem;
+  }
 }
 
 .mat-toolbar {
     
-    .title {
-        margin-left: 3px;
-        padding-left: 48px;
-        position: relative;
-    }
+  .title {
+      margin-left: 3px;
+      padding-left: 48px;
+      position: relative;
+  }
 
-    .logo {
-        position: absolute;
-        top: -3px;
-        left: -3px;
-        display: block;
-        width: 40px;
-        height: 40px;
-        background-image: url('/assets/university_of_helsinki-logo.svg');
-        background-position: left center;
-        background-size: auto 100%;
-        background-repeat: no-repeat;
-    }
+  .logo {
+      position: absolute;
+      top: -3px;
+      left: -3px;
+      display: block;
+      width: 40px;
+      height: 40px;
+      background-image: url('/assets/university_of_helsinki-logo.svg');
+      background-position: left center;
+      background-size: auto 100%;
+      background-repeat: no-repeat;
+  }
 }
 
 .map-grid {
-    .mat-toolbar-single-row {
-        background-color: $fd-dark-blue;
-        color: white;
-        height: 48px;
-    }
+  .mat-toolbar-single-row {
+      background-color: $fd-dark-blue;
+      color: white;
+      height: 48px;
+  }
 }
 
 .mat-dialog-container {
-
-    iframe {
-        width: 320px;
-        height: 180px;
-    }
+  iframe {
+      width: 320px;
+      height: 180px;
+  }
 }
 
 // Why doesn't this work from map-box.component.ts?
 .mapboxgl-ctrl-active {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 // Youtube player
@@ -78,47 +92,24 @@ table {
 }
 
 .tools {
-    flex-grow: 2;
+  flex-grow: 2;
 }  
   
 .mat-tab-label {
-    flex-grow: 1;
-    //height: 32px !important;
-    min-width: 100px !important;
+  flex-grow: 1;
+  //height: 32px !important;
+  min-width: 100px !important;
 }
 
-.locations {
+// Problems setting this from course styles because angular generated
+// element does not have indentifier used with encapsulated styles
+.locations-list .mat-list-item .mat-list-item-content {
+  align-items: flex-start !important;
+  line-height: 1.125rem !important;
+  padding: 0.5rem 0.5rem !important;
+}
 
-    width: 220px;
-  
-    .mat-list-item {
-      align-items: flex-start !important;
-      border-bottom: 1px solid #efefef;
-      font-size: 0.875rem;
-      height: auto !important;
-      padding: 1rem 0.5rem;
-  
-      .mat-list-item-content {
-        align-items: flex-start !important;
-        padding: 0.5rem 1rem !important;
-      }
-  
-      .mat-list-text {
-        display: flex;
-        flex-direction: row;
-        align-items: flex-start !important;
-      }
-  
-      .videoId {
-          margin-right: 1rem;
-      }
-
-      .name {
-        flex-grow: 1;
-      }
-  
-      &.active {
-        background-color: $fd-teal;
-      }
-    }
-  }
+.comments-list .mat-list-item .mat-list-item-content {
+  align-items: flex-start !important;
+  padding: 1rem !important;
+}

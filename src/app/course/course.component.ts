@@ -8,6 +8,8 @@ import { MapComponent } from './map/map.component';
 import { VideoComponent } from './video/video.component';
 import { VideosService } from '../services/videos.service';
 import { BehaviorSubject } from 'rxjs';
+import { MatSidenav } from '@angular/material';
+import { CourseSidenavService } from '../services/coursesidenav.service';
 
 @Component({
   selector: 'app-course',
@@ -21,6 +23,7 @@ export class CourseComponent implements OnInit {
   @ViewChild(MapComponent, { static: false }) map: MapComponent;
   @ViewChild(VideoComponent, { static: false }) video: VideoComponent;
   @ViewChild(ToolsComponent, { static: false }) tools: ToolsComponent;
+  @ViewChild('courseSidenav', {static: false}) public courseSidenav: MatSidenav;
 
   // Tools (Locations & Tasks)
   locations: any;
@@ -42,9 +45,6 @@ export class CourseComponent implements OnInit {
   public videoId;
   public videoIdSub: any;
 
-  private _videoId = new BehaviorSubject<any>(null);
-  readonly videoIdObs = this._videoId.asObservable();
-
   // video index for children (e.g. comments)
   private _videoIndex = new BehaviorSubject<any>(null);
   readonly videoIndexObs = this._videoIndex.asObservable();
@@ -59,7 +59,8 @@ export class CourseComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    public videosService: VideosService
+    public videosService: VideosService,
+    public courseSidenavService: CourseSidenavService
   ) { 
     this.topics = videosService.topics;
     this.topicsNew = videosService.topicsNew;
@@ -68,14 +69,14 @@ export class CourseComponent implements OnInit {
   }
 
   ngOnInit() {
-    // subscribe to entire collection
-    //this.videos = this.videosService.videos;
-    //this.videosService.loadAll();
   }
 
   ngAfterViewInit() {
 
-    console.log('course component after view init');
+    //console.log('course component after view init');
+
+    // set the course sidenav
+    this.courseSidenavService.setSidenav(this.courseSidenav);
 
     // This is such a weird way to handle this, but this call back fires so many times
     if (this.routeEventInitiated === false) {
@@ -84,12 +85,18 @@ export class CourseComponent implements OnInit {
 
   updateView() {
 
+    //console.log("update view");
+
      // Actions based on active route
      this.locIndexSub = this.route.params.subscribe(params => {
+
+      //console.log("Route subscription");
+      //console.log(params);
 
       // This is just getting crazy, so many event leaks
       if (this.videos && this.videos.length) {
 
+        // TODO: list only needs refreshing if topic or method changes
         this.videosFiltered = this.videos;
 
         // topic index
@@ -117,7 +124,22 @@ export class CourseComponent implements OnInit {
         }
 
         // location index
-        this.locIndex = +params['locIndex']; // (+) converts string 'id' to a number
+        this.locIndex = +params['locIndex'] - 1; // (+) converts string 'id' to a number
+
+        // if we have a video id, find the index
+        if (params['videoId']) {
+          let videoId = parseInt(params['videoId']);
+
+          let videoIndex = this.videosFiltered.findIndex(video=>{
+            return video.properties.videoId === videoId;
+          });
+
+          if (videoIndex > -1) {
+            this.locIndex = videoIndex;
+            // update route for now until (if) we do main routes by video ids
+            this.router.navigate(['/loc', this.locIndex+1]);
+          }
+        }
 
         // When we have a location
         if (this.videosFiltered[this.locIndex]) {
@@ -125,12 +147,11 @@ export class CourseComponent implements OnInit {
           // dispatch the location
           this._videoIndex.next(this.locIndex);
 
+          // video id (GoPro id)
           this.videoId = this.videosFiltered[this.locIndex].properties.videoId;
 
-          this._videoId.next(this.videoId);
-
           // We only need to do it once
-          //this.routeEventInitiated = true;
+          this.routeEventInitiated = true;
 
           if (this.videosFiltered[this.locIndex].properties.hasOwnProperty('name')) {
             this.title = this.videosFiltered[this.locIndex].properties.name;
@@ -186,6 +207,9 @@ export class CourseComponent implements OnInit {
             }.bind(this), 500);
 
           } else {
+
+            //console.log('Play video from update view.');
+
             // play without delay
             this.video.playVideo(this.videosFiltered[this.locIndex].properties.youtubeId);
           }
@@ -200,17 +224,20 @@ export class CourseComponent implements OnInit {
   }
 
   nextLocation() {
+
+    //console.log('next location');
+
     // If we have additional locations then go to the next one
     if (this.locIndex < this.videosFiltered.length - 1) {
       this.locIndex++;
       this.routeEventInitiated = false;
 
       if (this.topicIndex !== null) {
-        this.router.navigate([`/topic/${this.topicIndex}/loc`, this.locIndex]);
+        this.router.navigate([`/topic/${this.topicIndex}/loc`, this.locIndex + 1]);
       } else if (this.methodIndex !== null) {
-        this.router.navigate([`/method/${this.methodIndex}/loc`, this.locIndex]);
+        this.router.navigate([`/method/${this.methodIndex}/loc`, this.locIndex + 1]);
       } else {
-        this.router.navigate(['/loc', this.locIndex])
+        this.router.navigate(['/loc', this.locIndex + 1])
       }
       
       this.updateView();
@@ -245,6 +272,24 @@ export class CourseComponent implements OnInit {
       return ['/method', this.methodIndex, index];
     } else {
       return ['/loc', index];
+    }
+  }
+
+  public courseSidenavMode() {
+
+    if (window.innerWidth <= 640) {
+      return 'over';
+    } else {
+      return 'side';
+    }
+  }
+
+  public courseSidenavOpened() {
+
+    if (window.innerWidth <= 640) {
+      return false;//this.courseSidenavService.isOpen();
+    } else {
+      return true;
     }
   }
 }

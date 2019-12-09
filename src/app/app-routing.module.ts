@@ -12,31 +12,35 @@ import { PrivacyComponent } from './privacy/privacy.component';
 
 
 const routes: Routes = [
-  {
-    path: 'loc/:locIndex',
-    component: CourseComponent
-  },
-  {
-    path: 'topic/:topicIndex',
-    redirectTo: 'topic/:topicIndex/0', pathMatch: 'full' 
-  },
+  { path: 'dialog', component: Dialog },
+  { path: 'admin/videos', component: VideosComponent, canActivate: [AdminGuard] },
+  { path: 'admin/comments', component: CommentsAdminComponent, canActivate: [AdminGuard] },
+  { path: 'privacy', component: PrivacyComponent },
   {
     path: 'topic/:topicIndex/:locIndex',
-    component: CourseComponent
-  },
-  {
-    path: 'method/:methodIndex',
-    redirectTo: 'method/:methodIndex/0', pathMatch: 'full' 
+    component: CourseComponent 
   },
   {
     path: 'method/:methodIndex/:locIndex',
     component: CourseComponent
   },
-  { path: 'dialog', component: Dialog },
-  { path: 'admin/videos', component: VideosComponent, canActivate: [AdminGuard] },
-  { path: 'admin/comments', component: CommentsAdminComponent, canActivate: [AdminGuard] },
-  { path: 'privacy', component: PrivacyComponent },
-  { path: '', redirectTo: 'loc/0', pathMatch: 'full' }
+  {
+    path: 'topic/:topicIndex',
+    redirectTo: 'topic/:topicIndex/1', pathMatch: 'full' 
+  },
+  {
+    path: 'method/:methodIndex',
+    redirectTo: 'method/:methodIndex/1', pathMatch: 'full' 
+  },
+  {
+    path: 'videoId/:videoId',
+    component: CourseComponent
+  },
+  {
+    path: 'loc/:locIndex',
+    component: CourseComponent
+  },
+  { path: '', redirectTo: 'loc/1', pathMatch: 'full' }
 ]
 
 @NgModule({

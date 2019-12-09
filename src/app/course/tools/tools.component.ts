@@ -15,9 +15,10 @@ export class ToolsComponent implements OnInit {
   @Input() methodsNew: {}[];
   @Input() media: string[];
   @Input() authors: string[];
+  @Input() locIndex: number;
   @Input() tabIndex: number;
-  @Input() topicIndex: number;
-  @Input() methodIndex: number;
+  @Input() topicIndex: string;
+  @Input() methodIndex: string;
 
   listInitiated = false;
 
@@ -55,4 +56,21 @@ export class ToolsComponent implements OnInit {
     }
   }
 
+  // If the topic is active then current, otherwise 1
+  public topicLocIndex(topicSlug:string) {
+    if (this.topicIndex === topicSlug) {
+      return this.locIndex + 1;
+    } else {
+      return '1';
+    }
+  }
+
+  // If the method is active then current, otherwise 1
+  public methodLocIndex(methodSlug:string) {
+    if (this.methodIndex === methodSlug) {
+      return this.locIndex + 1;
+    } else {
+      return '1';
+    }
+  }
 }

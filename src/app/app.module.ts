@@ -10,6 +10,7 @@ import { Dialog } from './dialog/dialog.component';
 
 import { MapService } from './services/map.service';
 import { SidenavService } from './services/sidenav.service';
+import { CourseSidenavService } from './services/coursesidenav.service';
 
 import { environment } from '../environments/environment';
 import { AngularFireModule } from '@angular/fire';
@@ -107,6 +108,7 @@ import { PrivacyComponent } from './privacy/privacy.component';
     AuthService,
     MapService,
     SidenavService,
+    CourseSidenavService,
     AngularFirestore,
     AuthGuard,
     AdminGuard,

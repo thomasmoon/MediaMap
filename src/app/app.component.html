@@ -4,10 +4,11 @@
     
     <!-- Primary toolbar-->
     <mat-toolbar color="primary">
-        <span class="title">
+        <a class="title" [routerLink]=courseSidenavLink() (click)=courseSidenavToggle()>
             <span class="logo"></span>
-            Virtual Field Course - Forestry in the Tropics
-        </span>
+            <span class="title-extra">Virtual Field Course - </span>
+            Forestry in the Tropics
+        </a>
         <span></span>
         <span class="user">
           <span class="photo"></span>

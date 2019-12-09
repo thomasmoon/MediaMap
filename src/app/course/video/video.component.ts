@@ -43,11 +43,23 @@ export class VideoComponent implements OnInit {
   }
 
   ngAfterViewInit() {
+
+    //console.log('Video component after view init');
+    
     this.loadYoutubeApi();
   }
 
   // YouTube stuff
   loadYoutubeApi() {
+
+    // If we already have the script then skip this
+    if (typeof (<any>window).YT !== 'undefined') {
+      this.YTloaded = true;
+      return false;
+    }
+
+    //console.log('Adding Youtube script');
+
     // Load the IFrame Player API code asynchronously.
     var tag = document.createElement('script');
 
@@ -65,6 +77,10 @@ export class VideoComponent implements OnInit {
 
   // API will call this function when the video player is ready.
   onPlayerReady(event) {
+
+    //console.log('onPlayerReady');
+    //console.log(event);
+
     event.target.playVideo();
   }
   
@@ -80,22 +96,28 @@ export class VideoComponent implements OnInit {
 
   playVideo(videoId: string) {
 
-    console.log('playVideo');
+    //console.log('playVideo');
 
      // if the Youtube API is loaded
     if (this.YTloaded) {
 
-      console.log('YouTube API is loaded');
+      //console.log('YouTube API is loaded');
+      //console.log(this);
 
       // If the player exists load new video
-      if (this.YTplayer && this.YTplayer.loadVideoById) {
+      if (this.YTplayer) {
 
-        console.log('YouTube player exists');
+        //console.log('YouTube player exists');
 
-        this.YTplayer.loadVideoById(videoId);
+        // If the load video function exists
+        if (this.YTplayer.loadVideoById) {
+          this.YTplayer.loadVideoById(videoId);
+        } else {
+          console.log("this.YTplayer.loadVideoById does not exist");
+        }
+
       } else {
-
-        console.log('Create Youtube player');
+        //console.log('Create Youtube player');
         this.YTparams.videoId = videoId;
 
         // Create new player
@@ -104,17 +126,18 @@ export class VideoComponent implements OnInit {
 
       // When video is playing begin the routine to get bearing
       if (!this.YTbearingRoutineInitiated) {
-        console.log('Get video bearing');
+        //console.log('Get video bearing');
         this.getVideoBearing();
       }
 
     } else {
 
-      console.log('Load Youtube api');
+      //console.log('Load Youtube api');
+      //console.log(this);
 
       this.loadYoutubeApi();
 
-      // otherwise retry when it is
+      /* otherwise retry when it is*/
       setTimeout(()=>{
         this.playVideo(videoId);
       }, 1000);

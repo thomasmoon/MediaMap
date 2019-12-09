@@ -4,21 +4,17 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from './services/auth.service';
 import { MatSidenav } from '@angular/material';
 import { SidenavService } from './services/sidenav.service';
+import { CourseSidenavService } from './services/coursesidenav.service';
 
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
-  styles: [
-    "node_modules/primeicons/primeicons.css",
-    "node_modules/primeng/resources/themes/nova-light/theme.css",
-    "node_modules/primeng/resources/primeng.min.css"
-  ]
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
 
-  @ViewChild('sidenav', {static: true}) public sidenav: MatSidenav;
+  @ViewChild('sidenav', {static: false}) public sidenav: MatSidenav;
 
   title = 'Online Course in Tropical Forestry';
 
@@ -97,15 +93,13 @@ export class AppComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     public auth: AuthService,
-    public sidenavService: SidenavService
+    public sidenavService: SidenavService,
+    public courseSidenavService: CourseSidenavService
   ) {
       this.user = auth.user;
   }
 
   ngOnInit() {
-
-    console.log('Sidenav info');
-    console.log(this.sidenav);
 
     this.sidenavService.setSidenav(this.sidenav);
 
@@ -115,5 +109,21 @@ export class AppComponent implements OnInit {
       // Defaults to 0 if no query param provided.
       this.sidenavOpened = params['login'] || false;
     });
+  }
+
+  public courseSidenavToggle() {
+
+    if (window.innerWidth <= 640) {
+      this.courseSidenavService.toggle();
+    }
+  }
+
+  public courseSidenavLink() {
+
+    if (window.innerWidth > 640) {
+      return ['/'];
+    } else {
+      return null;
+    }
   }
 }
