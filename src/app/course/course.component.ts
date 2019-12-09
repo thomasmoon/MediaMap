@@ -196,24 +196,8 @@ export class CourseComponent implements OnInit {
           // Fly to the location with given zoom
           this.map.flyTo(this.videosFiltered[this.locIndex], zoom);
 
-          // if  mobile
-          if(false && window.innerWidth <= 640) {
-            // on delay so video has time to load
-            this.dialog.openDialog();
-
-            setTimeout(function() {
-              // Update video player with delay for popup
-              this.playVideo(this.locations[this.locIndex].properties.youtubeId);
-            }.bind(this), 500);
-
-          } else {
-
-            //console.log('Play video from update view.');
-
-            // play without delay
-            this.video.playVideo(this.videosFiltered[this.locIndex].properties.youtubeId);
-          }
-          
+          //console.log('Play video from update view.');
+          this.video.playVideo(this.videosFiltered[this.locIndex].properties.youtubeId);
         }
       }
     });
@@ -277,7 +261,7 @@ export class CourseComponent implements OnInit {
 
   public courseSidenavMode() {
 
-    if (window.innerWidth <= 640) {
+    if (window.innerWidth <= 600) {
       return 'over';
     } else {
       return 'side';
@@ -286,7 +270,7 @@ export class CourseComponent implements OnInit {
 
   public courseSidenavOpened() {
 
-    if (window.innerWidth <= 640) {
+    if (window.innerWidth <= 600) {
       return false;//this.courseSidenavService.isOpen();
     } else {
       return true;

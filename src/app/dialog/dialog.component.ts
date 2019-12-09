@@ -51,7 +51,7 @@ export class Dialog {
   onResize(event){
 
     // Close the dialog if resizing the screen to be bigger than
-    if (this.dialogOpen && event.target.innerWidth >= 640) {
+    if (this.dialogOpen && event.target.innerWidth >= 600) {
       this.dialog.closeAll();
     }
   }

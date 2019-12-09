@@ -113,14 +113,14 @@ export class AppComponent implements OnInit {
 
   public courseSidenavToggle() {
 
-    if (window.innerWidth <= 640) {
+    if (window.innerWidth <= 600) {
       this.courseSidenavService.toggle();
     }
   }
 
   public courseSidenavLink() {
 
-    if (window.innerWidth > 640) {
+    if (window.innerWidth > 600) {
       return ['/'];
     } else {
       return null;

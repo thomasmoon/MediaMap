@@ -10,12 +10,14 @@ $fd-dark-grey: #363636;
 .row-1 {
   display: flex;
   flex-direction: row;
+  min-height: calc(100vh - 64px);
 }
 
 .courseSidenav {
   width: 441px;
   min-width: 441px;
   max-width: 441px;
+  min-height: 100%;
 
   .courseNav {
     display: flex;
@@ -30,8 +32,12 @@ $fd-dark-grey: #363636;
 }
 
 .left {
-  border-right: solid 1px rgba(0,0,0,.12);
   height: 100%;
+}
+
+.locations-list {
+  border-left: solid 1px rgba(0,0,0,.12);
+  min-height: calc(100% - 0.5rem);
 }
 
 .content-panel {
@@ -41,11 +47,13 @@ $fd-dark-grey: #363636;
   mat-card-subtitle {
     align-items: center;
     display: flex;
-    padding: 0 0.5rem; // align with label, not index
+    padding: 0 1rem; // align with label, not index
     margin-bottom: 0.5rem;
 
     mat-icon {
-      width: 1.75rem;
+      text-align: right;
+      width: 1.5rem;
+      margin-right: 0.25rem;
     }
   }
   
@@ -68,7 +76,7 @@ $fd-dark-grey: #363636;
     }
   
     .name {
-      width: 11rem;
+      width: 10rem;
     }
 
     &.active {
@@ -117,8 +125,6 @@ $fd-dark-grey: #363636;
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  //flex-wrap: wrap;
-  //max-width: 640px;
   padding: 2rem;
   width: 100%;
 }
@@ -145,6 +151,10 @@ $fd-dark-grey: #363636;
     .left {
       height: auto;
     }
+
+    .locations-list {
+      border-left: 0;
+    }
   }
 
   .location .right {
@@ -152,7 +162,11 @@ $fd-dark-grey: #363636;
   }
 }
 
-@media (max-width: 640px){
+@media (max-width: 600px){
+
+  .row-1 {
+    min-height: calc(100vh - 56px);
+  }
 
   .courseSidenav {
     transform: translate3d(-220px,0,0);

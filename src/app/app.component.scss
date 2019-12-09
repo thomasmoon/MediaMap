@@ -11,7 +11,7 @@ mat-toolbar.mat-primary {
       color: white;
       text-decoration: none;
 
-      @media (max-width: 640px){
+      @media (max-width: 600px){
         .title-extra {
           display: none;
         }
