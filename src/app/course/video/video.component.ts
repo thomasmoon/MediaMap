@@ -11,6 +11,9 @@ export class VideoComponent implements OnInit {
   // Refs
   course: any;
 
+  // player is playing?
+  public playing: boolean = false;
+
   // YouTube
   _window = window;
   YTloaded = false;
@@ -80,23 +83,32 @@ export class VideoComponent implements OnInit {
 
     //console.log('onPlayerReady');
     //console.log(event);
-
-    event.target.playVideo();
+    if (this.course.autoplay) {
+      event.target.playVideo();
+    }
   }
   
   // 5. The API calls this function when the player's state changes.
   //    The function indicates that when playing a video (state=1),
   //    the player should play for six seconds and then stop.
   onPlayerStateChange(event) {
+
+    //console.log('Player event', event);
+    this.playing = event.data == (<any>window).YT.PlayerState.PLAYING;
+
     // When the clip is ended go to next
     if (event.data == (<any>window).YT.PlayerState.ENDED) {
       this.course.nextLocation();
     }
   }
 
-  playVideo(videoId: string) {
+  playVideo(videoId: any) {
 
     //console.log('playVideo');
+
+    if (videoId !== null) {
+      this.YTparams.videoId = videoId;
+    }
 
      // if the Youtube API is loaded
     if (this.YTloaded) {
@@ -109,16 +121,27 @@ export class VideoComponent implements OnInit {
 
         //console.log('YouTube player exists');
 
-        // If the load video function exists
-        if (this.YTplayer.loadVideoById) {
-          this.YTplayer.loadVideoById(videoId);
+        if (this.course.autoplay) {
+
+          // If the load video function exists
+          if (this.YTplayer.loadVideoById) {
+            this.YTplayer.loadVideoById(this.YTparams.videoId);
+          } else {
+            console.log("this.YTplayer.loadVideoById does not exist");
+          }
+
         } else {
-          console.log("this.YTplayer.loadVideoById does not exist");
+
+          // cue video
+          if (this.YTplayer.cueVideoById) {
+            this.YTplayer.cueVideoById(this.YTparams.videoId);
+          } else {
+            console.log("this.YTplayer.cueVideoById does not exist");
+          }
         }
 
       } else {
         //console.log('Create Youtube player');
-        this.YTparams.videoId = videoId;
 
         // Create new player
         this.YTplayer = new (<any>window).YT.Player('player', this.YTparams);

@@ -6,7 +6,18 @@
   <!-- Description-->
   <p>{{content}}</p>
 
-  <p class="videoId" *ngIf=videoId>Video {{videoId}}</p>
+  <p class="videoId" *ngIf=videoId>
+    
+    <span class="videoId-text">
+    Video {{videoId}}</span>
+
+    <mat-slide-toggle
+        (change)=course.toggleAutoplay($event)
+        [checked]=course.autoplay>
+      Autoplay
+    </mat-slide-toggle>
+
+  </p>
 
   <!-- Topics-->
   <ng-container *ngIf="topics?.length">

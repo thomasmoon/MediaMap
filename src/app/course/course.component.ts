@@ -52,6 +52,8 @@ export class CourseComponent implements OnInit {
   public topicIndex: number = null;
   public methodIndex: number = null;
 
+  public autoplay: boolean = false;
+
   // Route handling
   routeEventInitiated = false;
   listInitiated = false;
@@ -69,6 +71,16 @@ export class CourseComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    console.log('Local storage autoplay:', );
+
+    // check for autoplay preference
+    if (localStorage.getItem('autoplay') !== null) {
+      this.autoplay = localStorage.getItem('autoplay') == 'true';
+    // otherwise default by screen size
+    } else {
+      this.autoplay = window.innerWidth > 600;
+    }
   }
 
   ngAfterViewInit() {
@@ -275,5 +287,20 @@ export class CourseComponent implements OnInit {
     } else {
       return true;
     }
+  }
+
+  public toggleAutoplay(event) {
+
+    this.autoplay = event.checked;
+    localStorage.setItem('autoplay', this.autoplay.toString());
+
+    // start playback when we turn this on
+    if (this.autoplay) {
+      // if the player is not already playing, then fire it up
+      if (!this.video.playing) {
+        this.video.playVideo(null);
+      }
+    }
+    
   }
 }

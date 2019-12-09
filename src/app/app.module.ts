@@ -43,7 +43,8 @@ import {
   MatDialogRef,
   MAT_DIALOG_DATA,
   MatTabsModule,
-  MatCheckboxModule
+  MatCheckboxModule,
+  MatSlideToggleModule
 } from '@angular/material';
 import { MediaToolsComponent } from './media-tools/media-tools.component';
 import { ContentComponent } from './course/content/content.component';
@@ -96,6 +97,7 @@ import { PrivacyComponent } from './privacy/privacy.component';
     MatInputModule,
     MatRippleModule,
     MatSelectModule,
+    MatSlideToggleModule,
     MatTableModule,
     MatDialogModule,
     MatTabsModule,

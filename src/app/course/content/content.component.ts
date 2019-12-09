@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Inject, forwardRef } from '@angular/core';
+import { CourseComponent } from '../course.component';
 
 @Component({
   selector: 'app-content',
@@ -14,7 +15,15 @@ export class ContentComponent implements OnInit {
   @Input() methods: string[];
   @Input() keywords: string[];
 
-  constructor() { }
+  course: any;
+
+  constructor(
+
+    @Inject(forwardRef(() => CourseComponent)) course
+
+  ) { 
+    this.course = course;
+  }
 
   ngOnInit() {
   }
