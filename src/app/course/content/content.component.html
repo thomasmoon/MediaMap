@@ -1,13 +1,8 @@
 <div>
 
-  <!-- Name -->
-  <h1>{{title}}</h1>
-
-  <!-- Description-->
-  <p>{{content}}</p>
-
-  <p class="videoId" *ngIf=videoId>
-    
+  <!-- Video ID -->
+  <div class="videoId" *ngIf=videoId>
+  
     <span class="videoId-text">
     Video {{videoId}}</span>
 
@@ -17,7 +12,13 @@
       Autoplay
     </mat-slide-toggle>
 
-  </p>
+  </div>
+
+  <!-- Name -->
+  <h1>{{title}}</h1>
+
+  <!-- Description-->
+  <p>{{content}}</p>
 
   <!-- Topics-->
   <ng-container *ngIf="topics?.length">

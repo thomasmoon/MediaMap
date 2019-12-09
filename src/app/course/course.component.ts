@@ -72,13 +72,14 @@ export class CourseComponent implements OnInit {
 
   ngOnInit() {
 
-    console.log('Local storage autoplay:', );
-
-    // check for autoplay preference
     if (localStorage.getItem('autoplay') !== null) {
+
+      // check for autoplay preference
       this.autoplay = localStorage.getItem('autoplay') == 'true';
-    // otherwise default by screen size
+
     } else {
+      
+      // otherwise default by screen size
       this.autoplay = window.innerWidth > 600;
     }
   }

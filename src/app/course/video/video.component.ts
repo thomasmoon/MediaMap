@@ -123,11 +123,20 @@ export class VideoComponent implements OnInit {
 
         if (this.course.autoplay) {
 
-          // If the load video function exists
-          if (this.YTplayer.loadVideoById) {
-            this.YTplayer.loadVideoById(this.YTparams.videoId);
+          // Only when autoplay is toggled on will we not have an id
+          if (videoId === null) {
+
+            this.YTplayer.playVideo();
+
           } else {
-            console.log("this.YTplayer.loadVideoById does not exist");
+
+            // If the load video function exists
+            if (this.YTplayer.loadVideoById) {
+              this.YTplayer.loadVideoById(this.YTparams.videoId);
+            } else {
+              console.log("this.YTplayer.loadVideoById does not exist");
+            }
+
           }
 
         } else {
