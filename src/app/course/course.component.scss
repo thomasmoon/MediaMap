@@ -201,7 +201,7 @@ $fd-dark-grey: #363636;
 
   .mat-sidenav-content {
     margin-left: 2rem;
-    padding: 1rem;
+    padding: 0rem;
   }
 
   .locations-toolbar {
@@ -212,7 +212,13 @@ $fd-dark-grey: #363636;
     flex-direction: column;
 
     app-map {
-      max-width: none;
+      max-width: calc(100% - 2rem);
+      padding: 0 1rem;
     }
+  }
+
+  app-content,
+  app-comments {
+    margin: 0 1rem;
   }
 }
