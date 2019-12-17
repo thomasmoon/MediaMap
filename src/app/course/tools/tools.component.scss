@@ -1,6 +1,5 @@
-$fd-dark-blue: #121220;
-$fd-teal: #B0D9D8;
-$fd-dark-grey: #363636;
+$color_primary: #00A287;
+$color_active: rgba($color_primary, 0.25);
 
 :host {
   display: block;
@@ -16,6 +15,6 @@ mat-tab-group {
 
  .mat-list-item {
     &.active {
-      background-color: $fd-teal;
+      background-color: $color_active;
     }
  }

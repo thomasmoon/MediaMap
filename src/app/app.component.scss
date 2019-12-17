@@ -9,10 +9,17 @@ mat-toolbar.mat-primary {
 
     .title {
       color: white;
+      height: 2rem;
       text-decoration: none;
 
       @media (max-width: 600px){
         .title-extra {
+          display: none;
+        }
+      }
+
+      @media (max-width: 320px){
+        .title-text {
           display: none;
         }
       }

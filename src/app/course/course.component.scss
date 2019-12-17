@@ -1,5 +1,5 @@
-$fd-dark-blue: #121220;
-$fd-teal: #B0D9D8;
+$color_primary: #00A287;
+$color_active: rgba($color_primary, 0.25);
 $fd-dark-grey: #363636;
 
 :host {
@@ -80,7 +80,7 @@ $fd-dark-grey: #363636;
     }
 
     &.active {
-      background-color: $fd-teal;
+      background-color: $color_active;
     }
   }
 }
@@ -119,6 +119,10 @@ $fd-dark-grey: #363636;
   .camera {
     border-bottom: 1px solid #ccc;
   }
+}
+
+.mat-drawer-content {
+  overflow: hidden;
 }
 
 .mat-sidenav-content {
@@ -176,19 +180,22 @@ $fd-dark-grey: #363636;
     visibility: visible !important;
     
     .tab {
-      display: block;
+      background-color: $color_primary;
       cursor: pointer;
-      position: absolute;
-      top: 0px;
-      right: 0px;
-      width: 2rem;
-      height: 100%;
+      display: flex;
+      flex-grow: 1;
+      align-items: flex-start;
+      position: relative;
+      overflow: hidden;
       white-space: nowrap;
-      background-color: $fd-dark-grey;
+      width: 2rem;
       mat-card-subtitle {
         align-items: center;
         color: #efefef;
         display: flex;
+        line-height: 1.95rem;
+        margin-top: -1.75rem;
+        transform-origin: left bottom;
         transform: rotate(90deg);
 
         mat-icon {
