@@ -7,6 +7,10 @@ mat-toolbar.mat-primary {
         flex-grow: 1;
     }
 
+    @media (max-width: 600px){
+      padding: 0;
+    }
+
     .title {
       color: white;
       height: 2rem;

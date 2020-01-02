@@ -1,6 +1,9 @@
 :host {
-  margin-bottom: 1rem;
-  max-width: 450px;
+  max-width: 536px;
+
+  @media (max-width: 600px){
+    margin: 1rem;
+  }
 }
 
 mat-card {
