@@ -3,7 +3,7 @@ import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firest
 import { Observable } from 'rxjs';
 import { auth } from 'firebase';
 import { AuthService } from '../../services/auth.service';
-import { MatSidenav } from '@angular/material';
+import { MatSidenav } from '@angular/material/sidenav';
 import { SidenavService } from '../../services/sidenav.service';
 import { CommentsService, Comment, CommentType } from 'src/app/services/comments.service';
 import { CourseComponent } from '../course.component';

@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { CommentsService, Comment} from 'src/app/services/comments.service';
-import { MatPaginator } from '@angular/material';
+import { MatPaginator } from '@angular/material/paginator';
 import { tap } from 'rxjs/operators';
 @Component({
   selector: 'app-comments-admin',

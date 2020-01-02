@@ -67,7 +67,8 @@ h2 {
   align-items: stretch;
   display: flex;
   flex-direction: row;
-  min-height: calc(100vh - 56px);
+  height: auto !important;
+  min-height: 100%;
 }
 
 .mat-dialog-container {

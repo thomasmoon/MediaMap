@@ -8,7 +8,7 @@ import { MapComponent } from './map/map.component';
 import { VideoComponent } from './video/video.component';
 import { VideosService } from '../services/videos.service';
 import { BehaviorSubject } from 'rxjs';
-import { MatSidenav } from '@angular/material';
+import { MatSidenav } from '@angular/material/sidenav';
 import { CourseSidenavService } from '../services/coursesidenav.service';
 
 @Component({
