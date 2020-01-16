@@ -165,9 +165,24 @@ export class CommentsService {
   async add (data: Comment) {
 
     data.created = Date.now();
-    data.userId = this.auth.user.uid;
-    data.userName = this.auth.user.displayName;
-    data.userPhoto = this.auth.user.photoURL;
+
+     // If we don't have a user then anon login
+    if (!this.auth.user) {
+
+      this.auth.anonName = data.userName;
+      this.auth.loginAnon()
+        .then(user=>{
+          console.log(user);
+          data.userId = this.auth.user.uid;
+          data.userName = this.auth.user.displayName;
+          data.userPhoto = this.auth.user.photoURL;
+        })
+    } else {
+      data.userId = this.auth.user.uid;
+      data.userName = this.auth.user.displayName;
+      data.userPhoto = this.auth.user.photoURL;
+    }
+
 
     try {
       await this.db.collection<Comment>('comments').add(data);

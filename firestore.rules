@@ -5,8 +5,8 @@ service cloud.firestore {
       allow write: if request.auth.uid == uid || get(/databases/$(database)/documents/users/$(request.auth.uid)).data.isAdmin == true
     }
     match /comments/{comment} {
-      allow read: if request.auth.uid != null
-      allow create: if request.auth.uid != null
+      allow read
+      allow create
       allow update: if request.auth.uid == get(/databases/$(database)/documents/comments/$(comment)).data.userId
       allow delete: if request.auth.uid == get(/databases/$(database)/documents/comments/$(comment)).data.userId
     }

@@ -23,6 +23,7 @@ export class AuthService {
 
   public user: MoocUser;
   public user$: Observable<MoocUser>;
+  public anonName: string;
 
   constructor(
     public afAuth: AngularFireAuth,
@@ -108,16 +109,6 @@ export class AuthService {
     }
   }
 
-  public facebookLogin() {
-    const provider = new auth.FacebookAuthProvider();
-    return this.oAuthLogin(provider);
-  }
-
-  public googleLogin() {
-    const provider = new auth.GoogleAuthProvider();
-    return this.oAuthLogin(provider);
-  }
-
   public loginReturn(result: any) {
 
     //console.log('Login return');
@@ -136,6 +127,28 @@ export class AuthService {
       .catch(err => {
         console.log(err);
       });
+  }
+
+  public loginAnon() {
+
+    localStorage.setItem('displayName', this.anonName);
+
+    return this.afAuth.auth.signInAnonymously()
+      .then(this.loginAnonReturn);
+  }
+
+  public loginAnonReturn(result: any) {
+
+    //console.log('Anon login return');
+
+    if (result.user === null) {
+      return result;
+    }
+
+    let user = result.user;
+    user.displayName = localStorage.getItem('displayName');
+    
+    return this.updateUserData(user);
   }
 
   public redirectResult() {
@@ -196,8 +209,11 @@ export class AuthService {
       uid: user.uid,
       email: user.email,
       displayName: user.displayName,
-      photoURL: user.photoURL,
-      providerId: user.providerData[0].providerId
+      photoURL: user.photoURL
+    }
+
+    if (user.providerData.length) {
+      data.providerId = user.providerData[0].providerId;
     }
 
     return userRef.set(data, { merge: true })
