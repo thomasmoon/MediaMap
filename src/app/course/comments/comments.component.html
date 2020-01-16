@@ -45,6 +45,7 @@
 <mat-list class="comments-list">
     <mat-list-item *ngFor="let user of commentsByUser | async">
       <img matListAvatar *ngIf="user.userPhoto" src="{{user.userPhoto}}" alt="{{user.userName}}">
+      <mat-icon mat-list-avatar class="mat-user-avatar" *ngIf="!user.userPhoto">account_circle</mat-icon>
       <h3 matLine class="comment-user">{{user.userName}}</h3>
       <div class="comment" matLine *ngFor="let comment of user.comments">
         <p class="row1">

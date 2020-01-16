@@ -44,6 +44,11 @@ mat-list-item {
 
   .mat-list-avatar {
     align-self: flex-start;
+    background-size: cover;
+    font-size: 40px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
   }
 
   .comment {
