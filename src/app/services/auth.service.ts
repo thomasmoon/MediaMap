@@ -14,6 +14,7 @@ export interface MoocUser extends User {
   photoURL: string;
   displayName: string;
   providerId: string;
+  anonName?: string;
   isAdmin?: boolean;
   roles?: [];
 }
@@ -111,7 +112,7 @@ export class AuthService {
 
   public loginReturn(result: any) {
 
-    //console.log('Login return');
+    // console.log('Login return');
 
     if (result.user === null) {
       return result;
@@ -134,21 +135,19 @@ export class AuthService {
     localStorage.setItem('displayName', this.anonName);
 
     return this.afAuth.auth.signInAnonymously()
-      .then(this.loginAnonReturn);
+      .then(this.loginAnonReturn.bind(this));
   }
 
   public loginAnonReturn(result: any) {
 
     //console.log('Anon login return');
+    //console.log(result);
 
     if (result.user === null) {
       return result;
     }
-
-    let user = result.user;
-    user.displayName = localStorage.getItem('displayName');
     
-    return this.updateUserData(user);
+    return this.updateUserData(result.user);
   }
 
   public redirectResult() {
@@ -212,8 +211,12 @@ export class AuthService {
       photoURL: user.photoURL
     }
 
+    // Anonymous has no provider
     if (user.providerData.length) {
       data.providerId = user.providerData[0].providerId;
+    } else {
+      data.displayName = localStorage.getItem('displayName');
+      data.anonName = data.displayName;
     }
 
     return userRef.set(data, { merge: true })
@@ -225,6 +228,11 @@ export class AuthService {
           .then((snap) => {
             this.user.roles = snap.data().roles;
             this.user.isAdmin = snap.data().isAdmin;
+
+            // For anonymous users
+            if (this.user.isAnonymous) {
+              this.user.anonName = snap.data().anonName;
+            }
 
             //console.log("User roles updated");
             return this.user;

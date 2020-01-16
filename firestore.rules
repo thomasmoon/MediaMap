@@ -6,10 +6,10 @@ service cloud.firestore {
     }
     match /comments/{comment} {
       allow read
-      allow create
-      allow update: if request.auth.uid == get(/databases/$(database)/documents/comments/$(comment)).data.userId
-      allow delete: if request.auth.uid == get(/databases/$(database)/documents/comments/$(comment)).data.userId
-    }
+      allow create: if request.auth.uid != null
+      allow update: if request.auth.uid == get(/databases/$(database)/documents/comments/$(comment)).data.userId || get(/databases/$(database)/documents/users/$(request.auth.uid)).data.isAdmin == true
+      allow delete: if request.auth.uid == get(/databases/$(database)/documents/comments/$(comment)).data.userId || get(/databases/$(database)/documents/users/$(request.auth.uid)).data.isAdmin == true
+   }
     match /{document=**} {
       allow read, write: if false
     }

@@ -172,25 +172,33 @@ export class CommentsService {
       this.auth.anonName = data.userName;
       this.auth.loginAnon()
         .then(user=>{
-          console.log(user);
+          //console.log("Return from anonymous login");
           data.userId = this.auth.user.uid;
-          data.userName = this.auth.user.displayName;
+          data.userName = this.auth.user.anonName;
           data.userPhoto = this.auth.user.photoURL;
+
+          return this.addCommit(data);
+        })
+        .catch(err=>{
+          //console.log(err);
         })
     } else {
       data.userId = this.auth.user.uid;
-      data.userName = this.auth.user.displayName;
+      data.userName = this.auth.user.isAnonymous ? this.auth.user.anonName : this.auth.user.displayName;
       data.userPhoto = this.auth.user.photoURL;
+
+      return this.addCommit(data);
     }
+  }
 
-
+  async addCommit (data: Comment) {
     try {
       await this.db.collection<Comment>('comments').add(data);
-      console.log("Comment added successfully");
+      //console.log("Comment added successfully");
     }
     catch (error) {
-      console.log("Could not add comment");
-      console.log(error);
+      //console.log("Could not add comment");
+      //console.log(error);
     }
   }
 

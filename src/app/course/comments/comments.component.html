@@ -45,14 +45,14 @@
 <mat-list class="comments-list">
     <mat-list-item *ngFor="let user of commentsByUser | async">
       <img matListAvatar *ngIf="user.userPhoto" src="{{user.userPhoto}}" alt="{{user.userName}}">
-      <h3 matLine class="comment-user"> {{user.userName}} </h3>
+      <h3 matLine class="comment-user">{{user.userName}}</h3>
       <div class="comment" matLine *ngFor="let comment of user.comments">
         <p class="row1">
           <span class="date">{{ comment.created | date:'dd.MM.yy HH.mm' }} - </span>
           <span class="type">{{comment.typeDisplay}}</span>
         </p>
         <p class="row2">
-          <span class="text"> {{comment.text}}</span>
+          <span class="text">{{comment.text}}</span>
         </p>
         <div class="actions">
           <button

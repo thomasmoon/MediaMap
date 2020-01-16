@@ -69,23 +69,9 @@ export class CommentsComponent implements OnInit {
 
   addComment() {
 
-    console.log('add comment');
     let data = this.newComment;
-    console.log(data);
 
     if (!data.hasOwnProperty('id')) {
-
-      /*
-      console.log('Loc index');
-      console.log(this.course.locIndex);
-
-      console.log('Video id');
-      console.log(this.videoId);
-
-      console.log('Video index');
-      console.log(this.videoIndex);
-
-      console.log(this.course.videosFiltered);*/
 
       data.videoIndex = this.videoIndex;
       data.videoId = this.course.videosFiltered[this.videoIndex].properties.videoId;
