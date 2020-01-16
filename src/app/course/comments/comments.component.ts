@@ -93,6 +93,10 @@ export class CommentsComponent implements OnInit {
     this.newComment = comment;
   }
 
+  cancelEdit() {
+    this.initComment();
+  }
+
   deleteComment(commentId: string) {
 
     const dialogRef = this.course.dialog.dialog.open(Dialog, {

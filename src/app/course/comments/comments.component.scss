@@ -32,6 +32,17 @@ form {
     flex-grow: 1;
     width: 100%;
   }
+
+  .comment-anonymous {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+
+    .divider {
+      margin: 0 1rem;
+    }
+  }
 }
 
 mat-list-item {
