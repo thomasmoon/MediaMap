@@ -114,3 +114,7 @@ h2 {
   align-items: flex-start !important;
   padding: 1rem 0 !important;
 }
+
+.mat-list-item.privacy .mat-list-item-content {
+  justify-content: flex-end;
+}

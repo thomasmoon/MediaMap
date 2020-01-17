@@ -63,11 +63,6 @@ export class AppComponent implements OnInit {
       icon: 'menu_book',
       text: 'Course Content',
       route: '/'
-    },
-    {
-      icon: 'lock',
-      text: 'Privacy',
-      route: '/privacy'
     }
   ]
 
