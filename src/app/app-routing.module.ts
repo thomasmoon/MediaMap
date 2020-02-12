@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 import { CourseComponent } from './course/course.component';
+import { LessonComponent } from './lesson/lesson.component';
 import { Dialog } from './dialog/dialog.component';
 import { VideosComponent } from './admin/videos/videos.component';
 
@@ -39,6 +40,10 @@ const routes: Routes = [
   {
     path: 'loc/:locIndex',
     component: CourseComponent
+  },
+  {
+    path: 'lesson/:lessonIndex',
+    component: LessonComponent 
   },
   { path: '', redirectTo: 'loc/1', pathMatch: 'full' }
 ]

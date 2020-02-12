@@ -51,6 +51,7 @@ import { VideosComponent } from './admin/videos/videos.component';
 import { CommentsAdminComponent } from './admin/comments/comments.component';
 import { TableComponent } from './shared/table/table.component';
 import { PrivacyComponent } from './privacy/privacy.component';
+import { LessonComponent } from './lesson/lesson.component';
 
 
 @NgModule({
@@ -67,7 +68,8 @@ import { PrivacyComponent } from './privacy/privacy.component';
     VideosComponent,
     CommentsAdminComponent,
     TableComponent,
-    PrivacyComponent
+    PrivacyComponent,
+    LessonComponent
   ],
   imports: [
     AppRoutingModule,
