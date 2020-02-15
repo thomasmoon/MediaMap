@@ -14,7 +14,7 @@ import { CourseSidenavService } from './services/coursesidenav.service';
 })
 export class AppComponent implements OnInit {
 
-  @ViewChild('sidenav', {static: false}) public sidenav: MatSidenav;
+  @ViewChild('sidenav') public sidenav: MatSidenav;
 
   title = 'Online Course in Tropical Forestry';
 
