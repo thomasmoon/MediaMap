@@ -5,11 +5,11 @@ service cloud.firestore {
       allow write: if request.auth.uid == uid || get(/databases/$(database)/documents/users/$(request.auth.uid)).data.isAdmin == true
     }
     match /comments/{comment} {
-      allow read: if request.auth.uid != null
+      allow read
       allow create: if request.auth.uid != null
-      allow update: if request.auth.uid == get(/databases/$(database)/documents/comments/$(comment)).data.userId
-      allow delete: if request.auth.uid == get(/databases/$(database)/documents/comments/$(comment)).data.userId
-    }
+      allow update: if request.auth.uid == get(/databases/$(database)/documents/comments/$(comment)).data.userId || get(/databases/$(database)/documents/users/$(request.auth.uid)).data.isAdmin == true
+      allow delete: if request.auth.uid == get(/databases/$(database)/documents/comments/$(comment)).data.userId || get(/databases/$(database)/documents/users/$(request.auth.uid)).data.isAdmin == true
+   }
     match /{document=**} {
       allow read, write: if false
     }

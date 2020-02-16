@@ -45,11 +45,11 @@
               [style.background-image]="'url(' + auth.user?.photoURL + ')'"
               >
             </div>
-            <mat-icon mat-card-avatar class="mat-user-avatar" *ngIf="!auth.user">account_circle</mat-icon>
+            <mat-icon mat-card-avatar class="mat-user-avatar" *ngIf="!auth.user || auth.user.isAnonymous">account_circle</mat-icon>
           </div>
   
           <div class="name">
-            {{ (auth.user?.displayName) || "Welcome, guest" }}
+            {{ auth.user?.displayName || auth.user?.anonName || "Welcome, guest." }}
             <mat-chip-list *ngIf="auth.user?.roles">
               <mat-chip color="primary" selected="true" *ngIf="auth.user.roles.indexOf('admin') > -1">Admin</mat-chip>
               <mat-chip color="secondary" selected="true" *ngIf="auth.user.roles.indexOf('expert') > -1">Expert</mat-chip>
@@ -70,7 +70,6 @@
                 </button>
               </mat-action-list>
           </mat-list>
-          <a class="privacy" href="/privacy">Privacy Policy</a>
       </ng-container>
   
         <!-- Menu -->
@@ -104,6 +103,9 @@
                 <mat-icon>exit_to_app</mat-icon>
                 Logout
             </a>
+          </mat-list-item>
+          <mat-list-item class="privacy">
+            <a href="/privacy">Privacy</a>
           </mat-list-item>
         </mat-list>
 

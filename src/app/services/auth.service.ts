@@ -14,6 +14,7 @@ export interface MoocUser extends User {
   photoURL: string;
   displayName: string;
   providerId: string;
+  anonName?: string;
   isAdmin?: boolean;
   roles?: [];
 }
@@ -23,6 +24,7 @@ export class AuthService {
 
   public user: MoocUser;
   public user$: Observable<MoocUser>;
+  public anonName: string;
 
   constructor(
     public afAuth: AngularFireAuth,
@@ -108,19 +110,9 @@ export class AuthService {
     }
   }
 
-  public facebookLogin() {
-    const provider = new auth.FacebookAuthProvider();
-    return this.oAuthLogin(provider);
-  }
-
-  public googleLogin() {
-    const provider = new auth.GoogleAuthProvider();
-    return this.oAuthLogin(provider);
-  }
-
   public loginReturn(result: any) {
 
-    //console.log('Login return');
+    // console.log('Login return');
 
     if (result.user === null) {
       return result;
@@ -136,6 +128,26 @@ export class AuthService {
       .catch(err => {
         console.log(err);
       });
+  }
+
+  public loginAnon() {
+
+    localStorage.setItem('displayName', this.anonName);
+
+    return this.afAuth.auth.signInAnonymously()
+      .then(this.loginAnonReturn.bind(this));
+  }
+
+  public loginAnonReturn(result: any) {
+
+    //console.log('Anon login return');
+    //console.log(result);
+
+    if (result.user === null) {
+      return result;
+    }
+    
+    return this.updateUserData(result.user);
   }
 
   public redirectResult() {
@@ -196,8 +208,15 @@ export class AuthService {
       uid: user.uid,
       email: user.email,
       displayName: user.displayName,
-      photoURL: user.photoURL,
-      providerId: user.providerData[0].providerId
+      photoURL: user.photoURL
+    }
+
+    // Anonymous has no provider
+    if (user.providerData.length) {
+      data.providerId = user.providerData[0].providerId;
+    } else {
+      data.displayName = localStorage.getItem('displayName');
+      data.anonName = data.displayName;
     }
 
     return userRef.set(data, { merge: true })
@@ -209,6 +228,11 @@ export class AuthService {
           .then((snap) => {
             this.user.roles = snap.data().roles;
             this.user.isAdmin = snap.data().isAdmin;
+
+            // For anonymous users
+            if (this.user.isAnonymous) {
+              this.user.anonName = snap.data().anonName;
+            }
 
             //console.log("User roles updated");
             return this.user;

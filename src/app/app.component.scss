@@ -96,9 +96,13 @@ mat-sidenav-container {
 
   .sidebar-bottom {
     padding-bottom: 1rem;
-  }
 
-  a.privacy { position: absolute; bottom: 32px; left: 16px; }
+    .privacy {
+      .mat-list-item-content {
+        justify-content: flex-end;
+      }
+    }
+  }
 
   .mat-list {
     display: flex;

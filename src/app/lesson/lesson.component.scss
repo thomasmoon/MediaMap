@@ -1,0 +1,17 @@
+:host {
+  display: block;
+  padding: 2rem;
+  max-width: 536px; // 600 - 32 mobile bar - 32 padding
+}
+
+li {
+  margin-top: 1rem;
+}
+
+.videoId {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.875rem;
+}
