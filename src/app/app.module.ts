@@ -26,26 +26,21 @@ import { AngularFirestore, AngularFirestoreModule } from '@angular/fire/firestor
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatListModule } from '@angular/material/list';
-import {
-  MatButtonModule,
-  MatCardModule,
-  MatChipsModule,
-  MatIconModule,
-  MatFormFieldModule,
-  MatInputModule,
-  MatOptionModule,
-  MatPaginatorModule,
-  MatProgressSpinnerModule,
-  MatRippleModule,
-  MatSelectModule,
-  MatTableModule,
-  MatDialogModule,
-  MatDialogRef,
-  MAT_DIALOG_DATA,
-  MatTabsModule,
-  MatCheckboxModule,
-  MatSlideToggleModule
-} from '@angular/material';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatOptionModule, MatRippleModule } from '@angular/material/core';
+import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatTableModule } from '@angular/material/table';
+import { MatTabsModule } from '@angular/material/tabs';
 import { MediaToolsComponent } from './media-tools/media-tools.component';
 import { ContentComponent } from './course/content/content.component';
 import { ToolsComponent } from './course/tools/tools.component';
@@ -56,6 +51,7 @@ import { VideosComponent } from './admin/videos/videos.component';
 import { CommentsAdminComponent } from './admin/comments/comments.component';
 import { TableComponent } from './shared/table/table.component';
 import { PrivacyComponent } from './privacy/privacy.component';
+import { LessonComponent } from './lesson/lesson.component';
 
 
 @NgModule({
@@ -72,7 +68,8 @@ import { PrivacyComponent } from './privacy/privacy.component';
     VideosComponent,
     CommentsAdminComponent,
     TableComponent,
-    PrivacyComponent
+    PrivacyComponent,
+    LessonComponent
   ],
   imports: [
     AppRoutingModule,

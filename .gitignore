@@ -2,3 +2,4 @@ node_modules
 dist
 .firebase
 src/environments/
+.DS_Store

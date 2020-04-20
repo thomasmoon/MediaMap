@@ -1,5 +1,7 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
-import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { tap } from 'rxjs/operators';
 
 @Component({
@@ -20,8 +22,8 @@ export class TableComponent implements OnInit {
   dataSource: MatTableDataSource<{}> = new MatTableDataSource();
 
   // Define ViewChild.
-  @ViewChild(MatSort, {static: false}) sort: MatSort;
-  @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   sortingDataAccessor(item, property) {
 

@@ -1,6 +1,11 @@
 :host {
-  margin-bottom: 1rem;
+  display: block;
+  padding: 2rem;
   max-width: 536px; // 600 - 32 mobile bar - 32 padding
+}
+
+li {
+  margin-top: 1rem;
 }
 
 .videoId {

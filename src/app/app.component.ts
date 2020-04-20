@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from './services/auth.service';
-import { MatSidenav } from '@angular/material';
+import { MatSidenav } from '@angular/material/sidenav';
 import { SidenavService } from './services/sidenav.service';
 import { CourseSidenavService } from './services/coursesidenav.service';
 
@@ -14,7 +14,7 @@ import { CourseSidenavService } from './services/coursesidenav.service';
 })
 export class AppComponent implements OnInit {
 
-  @ViewChild('sidenav', {static: false}) public sidenav: MatSidenav;
+  @ViewChild('sidenav') public sidenav: MatSidenav;
 
   title = 'Online Course in Tropical Forestry';
 
@@ -29,13 +29,13 @@ export class AppComponent implements OnInit {
       icon: 'email',
       text: 'Google',
       route: '/'
-    },/*
+    },
     {
       id: 'facebook',
       icon: 'thumb_up',
       text: 'Facebook',
       route: '/'
-    },*/
+    },
     {
       id: 'twitter',
       icon: 'chat',
@@ -63,11 +63,6 @@ export class AppComponent implements OnInit {
       icon: 'menu_book',
       text: 'Course Content',
       route: '/'
-    },
-    {
-      icon: 'lock',
-      text: 'Privacy',
-      route: '/privacy'
     }
   ]
 

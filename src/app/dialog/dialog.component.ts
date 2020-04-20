@@ -1,5 +1,5 @@
 import {Component, Inject} from '@angular/core';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 export interface DialogData {
 }
@@ -33,7 +33,7 @@ export class Dialog {
       panelClass: 'custom-dialog'
     });
 
-    dialogRef.beforeClose().subscribe(result => {
+    dialogRef.beforeClosed().subscribe(result => {
       // Video player in dialg
       //$('.camera').html($('.videoWrapper'));
     });

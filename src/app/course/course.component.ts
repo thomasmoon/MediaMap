@@ -8,7 +8,7 @@ import { MapComponent } from './map/map.component';
 import { VideoComponent } from './video/video.component';
 import { VideosService } from '../services/videos.service';
 import { BehaviorSubject } from 'rxjs';
-import { MatSidenav } from '@angular/material';
+import { MatSidenav } from '@angular/material/sidenav';
 import { CourseSidenavService } from '../services/coursesidenav.service';
 
 @Component({
@@ -19,11 +19,11 @@ import { CourseSidenavService } from '../services/coursesidenav.service';
 export class CourseComponent implements OnInit {
 
   // For display of videos on mobile
-  @ViewChild(Dialog, { static: false }) dialog: Dialog;
-  @ViewChild(MapComponent, { static: false }) map: MapComponent;
-  @ViewChild(VideoComponent, { static: false }) video: VideoComponent;
-  @ViewChild(ToolsComponent, { static: false }) tools: ToolsComponent;
-  @ViewChild('courseSidenav', {static: false}) public courseSidenav: MatSidenav;
+  @ViewChild(Dialog) dialog: Dialog;
+  @ViewChild(MapComponent) map: MapComponent;
+  @ViewChild(VideoComponent) video: VideoComponent;
+  @ViewChild(ToolsComponent) tools: ToolsComponent;
+  @ViewChild('courseSidenav') public courseSidenav: MatSidenav;
 
   // Tools (Locations & Tasks)
   locations: any;

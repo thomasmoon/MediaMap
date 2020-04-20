@@ -3,7 +3,7 @@ import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firest
 import { Observable } from 'rxjs';
 import { auth } from 'firebase';
 import { AuthService } from '../../services/auth.service';
-import { MatSidenav } from '@angular/material';
+import { MatSidenav } from '@angular/material/sidenav';
 import { SidenavService } from '../../services/sidenav.service';
 import { CommentsService, Comment, CommentType } from 'src/app/services/comments.service';
 import { CourseComponent } from '../course.component';
@@ -69,23 +69,9 @@ export class CommentsComponent implements OnInit {
 
   addComment() {
 
-    console.log('add comment');
     let data = this.newComment;
-    console.log(data);
 
     if (!data.hasOwnProperty('id')) {
-
-      /*
-      console.log('Loc index');
-      console.log(this.course.locIndex);
-
-      console.log('Video id');
-      console.log(this.videoId);
-
-      console.log('Video index');
-      console.log(this.videoIndex);
-
-      console.log(this.course.videosFiltered);*/
 
       data.videoIndex = this.videoIndex;
       data.videoId = this.course.videosFiltered[this.videoIndex].properties.videoId;
@@ -105,6 +91,10 @@ export class CommentsComponent implements OnInit {
   editComment(comment: Comment) {
 
     this.newComment = comment;
+  }
+
+  cancelEdit() {
+    this.initComment();
   }
 
   deleteComment(commentId: string) {
