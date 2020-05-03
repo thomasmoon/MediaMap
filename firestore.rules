@@ -5,8 +5,15 @@ service cloud.firestore {
       return get(/databases/$(database)/documents/users/$(userId)).data.isAdmin == true
     }
     match /users/{uid} {
-      allow read: if request.auth.uid == uid || isAdmin(request.auth.uid)
-      allow write: if isAdmin(request.auth.uid)
+      // Can read own data, admin can read all
+      allow read:
+        if request.auth.uid == uid
+          || isAdmin(request.auth.uid)
+      // Can set own user data, except the admin flag
+      allow write:
+        if request.auth.uid == uid
+          && (!('isAdmin' in request.resource.data)
+            || request.resource.data.isAdmin == resource.data.isAdmin)
     }
     match /comments/{comment} {
       function isAuthor(userId) {
