@@ -134,7 +134,7 @@ export class AuthService {
 
     localStorage.setItem('displayName', this.anonName);
 
-    return this.afAuth.auth.signInAnonymously()
+    return this.afAuth.signInAnonymously()
       .then(this.loginAnonReturn.bind(this));
   }
 
@@ -154,7 +154,7 @@ export class AuthService {
 
     // console.log('check for redirect');
 
-    return this.afAuth.auth.getRedirectResult()
+    return this.afAuth.getRedirectResult()
     .then(result => {
       return this.loginReturn(result);
     });
@@ -165,7 +165,7 @@ export class AuthService {
     this.user = null;
     localStorage.setItem('user', null);
 
-    this.afAuth.auth.signOut().then(() => {
+    this.afAuth.signOut().then(() => {
 
       this.router.navigate(['/']);
     });
@@ -190,7 +190,7 @@ export class AuthService {
     this.afAuth.auth.getRedirectResult()
       .then(this.loginReturn);*/
 
-    return this.afAuth.auth.signInWithRedirect(provider)
+    return this.afAuth.signInWithRedirect(provider)
       // if using signInWithPopup: .then(this.loginReturn);
       //return this.afAuth.auth.signInWithPopup(provider)
       .then(this.loginReturn);
@@ -219,9 +219,11 @@ export class AuthService {
       data.anonName = data.displayName;
     }
 
+    //console.log('Data to update:', data);
+
     return userRef.set(data, { merge: true })
       .then(() => {
-        //console.log('User updated');
+        // console.log('User updated');
 
         /* Check for special roles set in db */
         return userRef.get().toPromise()
