@@ -1,7 +1,7 @@
-:host {
+.player {
   background: #000;
   display: flex;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
   margin-right: 1rem;
   //max-width: 320px;
   width: 100%;
@@ -11,4 +11,13 @@
 	position: relative;
   padding-bottom: 56.25%; /* 16:9 */
   width: 100%;
+}
+
+.video-info {
+  display: flex;
+  flex-direction: row;
+  font-size: 0.875rem;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 1rem;
 }

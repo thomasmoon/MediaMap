@@ -58,18 +58,15 @@
     </div>
   </mat-sidenav>
 
+  <!-- Content -->
   <mat-sidenav-content>
-    <div class="video-row">
 
-      <!-- Video -->
-      <app-video></app-video>
-      
-      <!-- Map -->
-      <app-map></app-map>
+    <!--<div class="video-row"></div>-->
 
-    </div>
+    <!-- Video -->
+    <app-video [videoId]=videoId></app-video>
 
-    <!-- Content -->
+    <!-- Location Content -->
     <app-content [videoId]=videoId [content]=content [title]=title [topics]="currentTopics" [methods]="currentMethods" [keywords]="currentKeywords">
     </app-content>
   

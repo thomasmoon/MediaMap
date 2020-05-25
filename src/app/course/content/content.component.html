@@ -1,108 +1,43 @@
-<div>
+<div class="content-wrapper">
 
-  <!-- Video ID -->
-  <div class="videoId" *ngIf=videoId>
-  
-    <span class="videoId-text">
-    Video {{videoId}}</span>
+  <div class="content-header">
+    <div class="content-heder-info">
 
-    <mat-slide-toggle
-        (change)=course.toggleAutoplay($event)
-        [checked]=course.autoplay>
-      Autoplay
-    </mat-slide-toggle>
+      <div class="content">
+        <!-- Name -->
+        <h1>{{title}}</h1>
 
+        <!-- Description-->
+        <p>{{content}}</p>
+
+        <!-- Topics-->
+        <ng-container *ngIf="topics?.length">
+          <h2>Topics</h2>
+          <mat-chip-list>
+              <mat-chip color="secondary" selected="true" *ngFor="let topic of topics;">{{topic}}</mat-chip>
+          </mat-chip-list>
+        </ng-container>
+
+        <!-- Methods-->
+        <ng-container *ngIf="methods?.length">
+          <h2>Research Methods</h2>
+          <mat-chip-list>
+              <mat-chip color="secondary" selected="true" *ngFor="let method of methods;">{{method}}</mat-chip>
+          </mat-chip-list>
+        </ng-container>
+
+        <!-- Keywords-->
+        <ng-container *ngIf="keywords?.length">
+          <h2>Keywords</h2>
+          <mat-chip-list>
+              <mat-chip color="secondary" *ngFor="let keyword of keywords;">{{keyword}}</mat-chip>
+          </mat-chip-list>
+        </ng-container>
+      </div>
+    </div>
+
+    <!-- Map -->
+    <app-map></app-map>
   </div>
 
-  <!-- Name -->
-  <h1>{{title}}</h1>
-
-  <!-- Description-->
-  <p>{{content}}</p>
-
-  <!-- Topics-->
-  <ng-container *ngIf="topics?.length">
-    <h2>Topics</h2>
-    <mat-chip-list>
-        <mat-chip color="secondary" selected="true" *ngFor="let topic of topics;">{{topic}}</mat-chip>
-    </mat-chip-list>
-  </ng-container>
-
-  <!-- Methods-->
-  <ng-container *ngIf="methods?.length">
-    <h2>Research Methods</h2>
-    <mat-chip-list>
-        <mat-chip color="secondary" selected="true" *ngFor="let method of methods;">{{method}}</mat-chip>
-    </mat-chip-list>
-  </ng-container>
-
-  <!-- Keywords-->
-  <ng-container *ngIf="keywords?.length">
-    <h2>Keywords</h2>
-    <mat-chip-list>
-        <mat-chip color="secondary" *ngFor="let keyword of keywords;">{{keyword}}</mat-chip>
-    </mat-chip-list>
-  </ng-container>
 </div>
-  
-    <!--
-  <h1>Qualitative Research Methods</h1>
-
-  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-
-  <h2>Focus Group Discussions</h2>
-
-  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-
-<h3>Female Focus Group</h3>
-
-  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Convallis convallis tellus id interdum velit. Interdum velit euismod in pellentesque massa placerat duis. Vitae aliquet nec ullamcorper sit amet risus. Vitae justo eget magna fermentum iaculis eu non diam. Ultrices sagittis orci a scelerisque purus semper eget duis at. Neque volutpat ac tincidunt vitae. Felis imperdiet proin fermentum leo vel orci. Diam quis enim lobortis scelerisque fermentum dui faucibus in. Pulvinar neque laoreet suspendisse interdum. Velit laoreet id donec ultrices. Velit egestas dui id ornare arcu. Tristique risus nec feugiat in. Sagittis nisl rhoncus mattis rhoncus urna neque viverra justo. Ut tristique et egestas quis ipsum suspendisse ultrices.</p>
-
-  <h3>Male Focus Group</h3>
-
-  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Pellentesque nec nam aliquam sem et. Erat imperdiet sed euismod nisi. Et malesuada fames ac turpis egestas. Diam vel quam elementum pulvinar etiam non quam. Mauris in aliquam sem fringilla ut morbi tincidunt augue interdum. Fringilla phasellus faucibus scelerisque eleifend donec pretium vulputate. Augue interdum velit euismod in pellentesque massa placerat. Sem viverra aliquet eget sit amet. Venenatis lectus magna fringilla urna porttitor. Ut ornare lectus sit amet est placerat. Proin nibh nisl condimentum id venenatis. Nisi est sit amet facilisis magna. Malesuada nunc vel risus commodo viverra maecenas accumsan lacus.</p>
-
-
-  <h3>Female Focus Group</h3>
-
-  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Convallis convallis tellus id interdum velit. Interdum velit euismod in pellentesque massa placerat duis. Vitae aliquet nec ullamcorper sit amet risus. Vitae justo eget magna fermentum iaculis eu non diam. Ultrices sagittis orci a scelerisque purus semper eget duis at. Neque volutpat ac tincidunt vitae. Felis imperdiet proin fermentum leo vel orci. Diam quis enim lobortis scelerisque fermentum dui faucibus in. Pulvinar neque laoreet suspendisse interdum. Velit laoreet id donec ultrices. Velit egestas dui id ornare arcu. Tristique risus nec feugiat in. Sagittis nisl rhoncus mattis rhoncus urna neque viverra justo. Ut tristique et egestas quis ipsum suspendisse ultrices.</p>
-
-  <h2>Personal Interviews</h2>
-
-  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Semper risus in hendrerit gravida rutrum quisque. Ullamcorper eget nulla facilisi etiam dignissim diam quis enim. Eget arcu dictum varius duis at consectetur lorem. Volutpat consequat mauris nunc congue nisi vitae suscipit tellus mauris. Tellus in metus vulputate eu scelerisque felis imperdiet proin. Malesuada bibendum arcu vitae elementum curabitur vitae nunc sed. Odio facilisis mauris sit amet massa. Sagittis aliquam malesuada bibendum arcu vitae elementum curabitur. Amet massa vitae tortor condimentum lacinia quis. Consectetur adipiscing elit ut aliquam purus sit amet luctus venenatis. Proin fermentum leo vel orci porta non pulvinar neque laoreet. Ac placerat vestibulum lectus mauris ultrices eros in cursus. Vitae tempus quam pellentesque nec nam aliquam. Nec dui nunc mattis enim ut tellus elementum sagittis.
-
-      Ac placerat vestibulum lectus mauris ultrices eros. Tempus egestas sed sed risus pretium quam vulputate dignissim suspendisse. Ullamcorper eget nulla facilisi etiam dignissim diam quis enim lobortis. Imperdiet dui accumsan sit amet nulla facilisi morbi. Pellentesque habitant morbi tristique senectus et. Amet luctus venenatis lectus magna fringilla urna porttitor. Posuere lorem ipsum dolor sit. Nulla facilisi morbi tempus iaculis urna. Amet purus gravida quis blandit turpis cursus in. Vulputate enim nulla aliquet porttitor. Viverra vitae congue eu consequat ac felis. Scelerisque purus semper eget duis at tellus at. Donec massa sapien faucibus et molestie ac feugiat sed lectus. Interdum velit laoreet id donec ultrices tincidunt arcu non sodales. Tortor dignissim convallis aenean et tortor at. Quis varius quam quisque id. Dictum sit amet justo donec enim diam. Velit ut tortor pretium viverra suspendisse potenti nullam ac tortor. Integer quis auctor elit sed vulputate mi sit amet. Faucibus ornare suspendisse sed nisi lacus sed.</p>
- 
-<h1>Introduction</h1>
-
-<p>Every two years, the Viikki Tropical Resources Institute (VITRI) of the University of Helsinki arranges an international field course with partner universities in tropical countries. The most recent field course was organized in Luang Prabang and the Nambak region of northern Laos January 3-20, 2019.</p>
-
-<p>The content of the field course covers the ecology, management and conservation of natural and man-made production ecosystems (including agroforestry and estate crops); tree uses, including non-wood forest products; deforestation and forest rehabilitation; community forestry, socio-economic aspects, and forest and land-use-policies.</p>
-
-
-<h1>Value-chain Analysis</h1>
-
-<p>Collection and cleaning of river weed (kaipen) on the bank of the Nam Bak river in Ban Bom, Nambak district, northern Laos.</p>
-
-<p>Collection of river weed (kaipen) in the Nam Bak river in northern Laos by villagers from Nam Bak village.</p>
-
-<p>Here you can buy a wide range of non-timber forest products and much more!</p>
-
-
-<h1>Household Interviews</h1>
-
-<p>One of three villages in our study area, this one in the mountains is the most remote and perhaps most dependent on non-timber forest products and shifting cultivation.</p>
-
-<h1>Ecotourism</h1>
-
-<p>We had a well-deserved couple of days vacation in this idyllic little town nestled between some amazing mountains.  We also took a river boat up to  Muang Ngoi where we climbed up to an amazing view point and visited to caves accompanied by our local guide, an amazingly agile dog that could even climb ladders.  This is a great destination for experiencing the landscape of northern Laos!</p>
-
-
-<h1>Forest Inventory</h1>
-
-<p>Here we begin measuring one of six plots in a young (older than 25 years) secondary growth forest.  We record the diameters of every tree, the height from every third and also measure the bamboo.</p>
-
-<h1>Biodiversity Sampling</h1>
-
-<p>University Lecturer Eshetu Yirdaw gives us an introduction to counting tree, sapling and seedling species on our plot in this primary forest as well as climbers and epiphytes such as lichen, moss, herbs and ferns.</p>
--->

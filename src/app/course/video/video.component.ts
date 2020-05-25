@@ -1,4 +1,4 @@
-import { Component, OnInit, forwardRef, Inject, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, forwardRef, Inject, ViewChild } from '@angular/core';
 import { CourseComponent } from '../../course/course.component';
 
 @Component({
@@ -7,6 +7,8 @@ import { CourseComponent } from '../../course/course.component';
   styleUrls: ['./video.component.scss']
 })
 export class VideoComponent implements OnInit {
+
+  @Input() videoId: string;
 
   // Refs
   course: any;

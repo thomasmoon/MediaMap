@@ -1,4 +1,19 @@
-<div class="videoWrapper">
-    <div id="player"></div>
+<div class="player">
+    <div class="videoWrapper">
+        <div id="player"></div>
+    </div>
 </div>
 
+<!-- Video Info -->
+<div class="video-info" *ngIf=videoId>
+
+    <span class="videoId-text">
+    Video {{videoId}}</span>
+
+    <mat-slide-toggle
+        (change)=course.toggleAutoplay($event)
+        [checked]=course.autoplay>
+        Autoplay
+    </mat-slide-toggle>
+
+</div>

@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Dialog } from '../dialog/dialog.component';
 import { ToolsComponent } from './tools/tools.component';
 import { MapComponent } from './map/map.component';
+import { ContentComponent } from './content/content.component';
 import { VideoComponent } from './video/video.component';
 import { VideosService } from '../services/videos.service';
 import { BehaviorSubject } from 'rxjs';
@@ -20,10 +21,13 @@ export class CourseComponent implements OnInit {
 
   // For display of videos on mobile
   @ViewChild(Dialog) dialog: Dialog;
-  @ViewChild(MapComponent) map: MapComponent;
+  @ViewChild(ContentComponent) contentComponent: ContentComponent;
   @ViewChild(VideoComponent) video: VideoComponent;
   @ViewChild(ToolsComponent) tools: ToolsComponent;
   @ViewChild('courseSidenav') public courseSidenav: MatSidenav;
+
+  // Map nested in content
+  private map: MapComponent;
 
   // Tools (Locations & Tasks)
   locations: any;
@@ -86,7 +90,9 @@ export class CourseComponent implements OnInit {
 
   ngAfterViewInit() {
 
-    //console.log('course component after view init');
+    console.log('course component after view init');
+    // set reference to map
+    this.map = this.contentComponent.map;
 
     // set the course sidenav
     this.courseSidenavService.setSidenav(this.courseSidenav);

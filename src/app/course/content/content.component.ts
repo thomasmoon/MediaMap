@@ -1,5 +1,6 @@
-import { Component, Input, OnInit, Inject, forwardRef } from '@angular/core';
+import { Component, Input, OnInit, Inject, forwardRef, ViewChild } from '@angular/core';
 import { CourseComponent } from '../course.component';
+import { MapComponent } from '../map/map.component';
 
 @Component({
   selector: 'app-content',
@@ -7,6 +8,8 @@ import { CourseComponent } from '../course.component';
   styleUrls: ['./content.component.scss']
 })
 export class ContentComponent implements OnInit {
+
+  @ViewChild(MapComponent) map: MapComponent;
 
   @Input() videoId: string;
   @Input() title: string;
