@@ -68,7 +68,7 @@ export class MapComponent implements OnInit{
 
   private initializeMap() {
 
-    this.buildMap()
+    this.buildMap();
   }
 
   buildMap() {
