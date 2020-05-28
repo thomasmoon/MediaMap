@@ -29,6 +29,7 @@ export class MapComponent implements OnInit{
   currentBearing: number;
   defaultPitch = 60;
   currentPitch = this.defaultPitch;
+  hidden: boolean = false;
 
   // data
   source: any;
@@ -188,6 +189,13 @@ export class MapComponent implements OnInit{
 
   flyTo(data: GeoJson, zoom = 15) {
 
+    // Hide the map if we don't have lat & long
+    if (!data.geometry.coordinates[0] || !data.geometry.coordinates[1] ) {
+      this.hidden = true;
+      return false;
+    }
+
+    // Fly to location
     this.map.flyTo({
       center: data.geometry.coordinates,
       zoom: zoom
@@ -198,5 +206,8 @@ export class MapComponent implements OnInit{
       // 0 and 1 and returns another number between 0 and 1.
       easing: function (t) { return t; }*/
     })
+
+    // Make sure the map is visible
+    this.hidden = false;
   }
 }
