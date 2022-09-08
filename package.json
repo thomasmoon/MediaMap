@@ -30,7 +30,7 @@
     "firebase": "~7.14.5",
     "jquery": "~3.5.1",
     "mapbox-gl": "~1.10.1",
-    "read-excel-file": "~4.0.6",
+    "read-excel-file": "~4.0.8",
     "rxjs": "~6.5.4",
     "stream": "~0.0.2",
     "tslib": "~2.0.0",
